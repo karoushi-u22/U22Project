@@ -1,4 +1,0 @@
-repository "U22Project@karoshi@cloud"
-  path "/"
-    br "/main"
-    co "/main"
