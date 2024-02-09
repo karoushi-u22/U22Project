@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveCharactorController : MonoBehaviour
 {
-    private float speed = 32f;
+    private float speed = 0.0008f;
     private SpriteRenderer renderer;
     
 
