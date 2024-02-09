@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class MoveCharactorController : MonoBehaviour
 {
-    private float speed = 32f;
-    private SpriteRenderer renderer;
-    
+    private float speed = 0.01f;
 
     void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
