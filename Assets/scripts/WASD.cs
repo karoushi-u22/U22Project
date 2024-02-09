@@ -1,39 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCharactorController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    private float speed = 32f;
-    private SpriteRenderer renderer;
-    
+    public float moveSpeed = 5f; // 移動速度を設定
+    public float gridSize = 1f;  // マップ上の1マスのサイズを設定
 
-    void Start()
-    {
-        renderer = GetComponent<SpriteRenderer>();
-    }
-
+    // プレイヤーの移動処理
     void Update()
     {
-        Vector2 position = transform.position;
+        // 上下左右のキー入力のみを処理する
+        float moveX = 0f;
+        float moveY = 0f;
 
-        if (Input.GetKey("left"))
+        if (Input.GetKey(KeyCode.W))
         {
-            position.x -= speed;
+            moveY = 1f;
         }
-        else if (Input.GetKey("right"))
+        else if (Input.GetKey(KeyCode.S))
         {
-            position.x += speed;
+            moveY = -1f;
         }
-        else if (Input.GetKey("up"))
+        else if (Input.GetKey(KeyCode.D))
         {
-            position.y += speed;
+            moveX = 1f;
         }
-        else if (Input.GetKey("down"))
+        else if (Input.GetKey(KeyCode.A))
         {
-            position.y -= speed;
+            moveX = -1f;
         }
 
-        transform.position = position;
+        // 移動量を1マスの大きさに調整
+        Vector2 movement = new Vector2(moveX, moveY).normalized * gridSize;
+
+        // 移動量を計算して、現在の位置に加算
+        transform.Translate(movement * moveSpeed * Time.deltaTime);
     }
 }
