@@ -18,13 +18,16 @@ public class Collidable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(z_Filter);
-        Debug.Log(z_CollidedObjects);
         z_Collider.OverlapCollider(z_Filter, z_CollidedObjects);
         
         foreach(var obj in z_CollidedObjects)
         {
             Debug.Log("Collided with " + obj.name);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
     }
 }
