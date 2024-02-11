@@ -53,6 +53,6 @@ TagManager:
   - name: Misc2
     uniqueID: 3547109073
     locked: 0
-  - name: char
+  - name: Interactable
     uniqueID: 890437857
     locked: 0
