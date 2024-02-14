@@ -41,10 +41,10 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Floor
+  - name: floor2
     uniqueID: 1355584525
     locked: 0
-  - name: Walls
+  - name: floor
     uniqueID: 3641115331
     locked: 0
   - name: Misc1
