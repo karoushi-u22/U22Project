@@ -1,36 +1,79 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCharactorController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    private float speed = 0.01f;
+    [SerializeField]
+    private float moveSpeed = 5f; // 移動速度を設定
+    [SerializeField]
+    private float gridSize = 1f;  // マップ上の1マスのサイズを設定
 
-    void Start()
-    {
-    }
+    private bool isMoving = false; // プレイヤーが移動中かどうかを追跡する変数
 
     void Update()
     {
-        Vector2 position = transform.position;
+        // 移動中は入力を受け付けない
+        if (isMoving)
+            return;
 
-        if (Input.GetKey("left"))
+        // 上下左右のキー入力のみを処理する
+        float moveX = 0f;
+        float moveY = 0f;
+
+        if (Input.GetKey(KeyCode.W))
         {
-            position.x -= speed;
+            moveY = 1f;
         }
-        else if (Input.GetKey("right"))
+        else if (Input.GetKey(KeyCode.S))
         {
-            position.x += speed;
+            moveY = -1f;
         }
-        else if (Input.GetKey("up"))
+        else if (Input.GetKey(KeyCode.D))
         {
-            position.y += speed;
+            moveX = 1f;
         }
-        else if (Input.GetKey("down"))
+        else if (Input.GetKey(KeyCode.A))
         {
-            position.y -= speed;
+            moveX = -1f;
         }
 
-        transform.position = position;
+        // 移動開始
+        if (moveX != 0 || moveY != 0)
+        {
+            StartCoroutine(MoveToNextGrid(new Vector2(moveX, moveY)));
+        }
+    }
+
+    // 次のマスへの移動を徐々に行うコルーチン
+    private System.Collections.IEnumerator MoveToNextGrid(Vector2 direction)
+    {
+        isMoving = true;
+
+        // 現在の位置から移動先を計算
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = startPosition + (Vector3)direction * gridSize;
+
+        // 移動先をグリッドの中心に丸める
+        endPosition.x = Mathf.Floor(endPosition.x / gridSize) * gridSize + gridSize / 2f;
+        endPosition.y = Mathf.Floor(endPosition.y / gridSize) * gridSize + gridSize / 2f;
+
+
+        // 移動開始
+        float sqrDistance = (endPosition - startPosition).sqrMagnitude; // 移動する距離の二乗を計算
+        float distanceTraveled = 0f;
+
+        while (distanceTraveled < sqrDistance)
+        {
+            // 移動速度に応じて次の位置を計算し、プレイヤーを移動させる
+            float deltaMove = moveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, endPosition, deltaMove);
+
+            // 移動した距離を更新
+            distanceTraveled = (transform.position - startPosition).sqrMagnitude;
+
+            yield return null;
+        }
+
+        // 移動が完了したら移動中フラグをオフにする
+        isMoving = false;
     }
 }
