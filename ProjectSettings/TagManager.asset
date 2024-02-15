@@ -41,24 +41,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: 0
+  - name: Floor
     uniqueID: 2800251027
     locked: 0
-  - name: 1
+  - name: Outline
     uniqueID: 2460072035
     locked: 0
-  - name: 2
-    uniqueID: 3474323459
-    locked: 0
-  - name: 3
+  - name: Object
     uniqueID: 668394245
     locked: 0
-  - name: 4
-    uniqueID: 3979971379
-    locked: 0
-  - name: 5
+  - name: Object2
     uniqueID: 3365681551
+    locked: 0
+  - name: Object3
+    uniqueID: 3474323459
     locked: 0
   - name: char
     uniqueID: 900232803
+    locked: 0
+  - name: Front
+    uniqueID: 1366769179
     locked: 0
