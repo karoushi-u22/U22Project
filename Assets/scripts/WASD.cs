@@ -56,6 +56,20 @@ public class PlayerMovement : MonoBehaviour
         endPosition.x = Mathf.Floor(endPosition.x / gridSize) * gridSize + gridSize / 2f;
         endPosition.y = Mathf.Floor(endPosition.y / gridSize) * gridSize + gridSize / 2f;
 
+        // 移動先にコリジョンがあるか確認
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(endPosition, gridSize / 10f); // 移動先座標上にコリジョンがあるか判定
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject != gameObject) // 自分以外のコリジョンがある場合、移動を中止
+            {
+                Debug.Log("移動先にコリジョンがあります。移動を中止します。");
+                isMoving = false;
+                yield break;
+            }
+        }
+
+        // デバッグログ：移動先の位置を表示
+        Debug.Log("移動先の位置: " + endPosition);
 
         // 移動開始
         float sqrDistance = (endPosition - startPosition).sqrMagnitude; // 移動する距離の二乗を計算
