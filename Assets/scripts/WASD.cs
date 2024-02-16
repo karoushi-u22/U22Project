@@ -21,19 +21,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            moveY = 1f;
+            moveY = gridSize;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            moveY = -1f;
+            moveY = -gridSize;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            moveX = 1f;
+            moveX = gridSize;
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            moveX = -1f;
+            moveX = -gridSize;
         }
 
         // 移動開始
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
         // 現在の位置から移動先を計算
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = startPosition + (Vector3)direction * gridSize;
+        Vector3 endPosition = startPosition + (Vector3)direction;
 
         // 移動先をグリッドの中心に丸める
         endPosition.x = Mathf.Floor(endPosition.x / gridSize) * gridSize + gridSize / 2f;
