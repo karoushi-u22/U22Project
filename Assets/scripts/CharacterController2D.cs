@@ -4,7 +4,7 @@ using U22Game.Handlers;
 namespace U22Game.Controller{
     public class CharacterController2D : MonoBehaviour
     {
-        public float moveSpeed = 5f; // キャラクターの移動速度
+        public float moveSpeed = 2f; // キャラクターの移動速度
 
         private Rigidbody2D rb;
 
