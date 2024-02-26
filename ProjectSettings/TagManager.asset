@@ -47,18 +47,18 @@ TagManager:
   - name: Outline
     uniqueID: 2460072035
     locked: 0
-  - name: ' No judgment'
+  - name: No judgment
     uniqueID: 668394245
     locked: 0
-  - name: Object2
+  - name: Object
     uniqueID: 3365681551
-    locked: 0
-  - name: Object3
-    uniqueID: 3474323459
     locked: 0
   - name: char
     uniqueID: 900232803
     locked: 0
   - name: Front
     uniqueID: 1366769179
+    locked: 0
+  - name: UI
+    uniqueID: 3226310809
     locked: 0
