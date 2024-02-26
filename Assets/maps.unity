@@ -3432,11 +3432,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1139586344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7fccbfd06194b047a0e7dbed4e467d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  gridSize: 1
+  m_Script: {fileID: 11500000, guid: c4224761dd5f0eb4ba043ae4cb40e60b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  moveSpeed: 2
 --- !u!212 &1139586346
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3498,7 +3497,7 @@ Transform:
   m_GameObject: {fileID: 1139586344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.553401, y: -0.93155736, z: 0}
+  m_LocalPosition: {x: 9.5, y: -1.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3606,8 +3605,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
@@ -3650,8 +3649,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_AssetsPPU: 32
   m_RefResolutionX: 384
   m_RefResolutionY: 256
