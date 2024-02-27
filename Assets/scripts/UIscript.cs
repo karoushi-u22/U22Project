@@ -24,7 +24,7 @@ public class ImageHoverEffect : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private void MoveImageUp()
     {
-        // 画像をY軸方向に10上に移動
+        // 画像をY軸方向に上に移動
         rectTransform.localPosition += new Vector3(0, 200, 0);
     }
 
