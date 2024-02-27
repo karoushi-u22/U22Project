@@ -1461,6 +1461,7 @@ GameObject:
   - component: {fileID: 275253311}
   - component: {fileID: 275253310}
   - component: {fileID: 275253309}
+  - component: {fileID: 275253313}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1551,6 +1552,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &275253313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275253308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920816904e79cac4baf12a559f93833e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageToShow: {fileID: 1809357607}
 --- !u!1 &323505230
 GameObject:
   m_ObjectHideFlags: 0
@@ -4024,9 +4038,8 @@ GameObject:
   - component: {fileID: 1809357606}
   - component: {fileID: 1809357608}
   - component: {fileID: 1809357607}
-  - component: {fileID: 1809357609}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DeskPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4089,19 +4102,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809357605}
   m_CullTransparentMesh: 1
---- !u!114 &1809357609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1809357605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920816904e79cac4baf12a559f93833e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageToShow: {fileID: 1809357607}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
