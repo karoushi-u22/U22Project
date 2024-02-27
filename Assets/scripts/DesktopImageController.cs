@@ -4,7 +4,7 @@ using U22Game.Handlers;
 using U22Game.Events;
 
 namespace U22Game.UI{
-    public class ItemReader : MonoBehaviour
+    public class DesktopUI : MonoBehaviour
     {
         public Image imageToShow;
         private bool isImageVisible = false; // 画像の表示状態を管理するフラグ
@@ -33,7 +33,7 @@ namespace U22Game.UI{
 
         private void Update()
         {
-            // Fキーが押され、かつ画像が表示されている場合に画像を非表示にする
+            // ESCキーが押され、かつ画像が表示されている場合に画像を非表示にする
             if (Input.GetKeyDown(KeyCode.Escape) && isImageVisible)
             {
                 SetImageVisibility(false);
