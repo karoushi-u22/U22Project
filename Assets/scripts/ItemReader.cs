@@ -7,14 +7,14 @@ namespace U22Game.Utilities{
     {
         private void Start()
         {
-            // CharacterCollisionスクリプトから発生するイベントを購読
-            CharacterCollision.OnItemGenerated += HandleItemGenerated;
+            // DesktopEventスクリプトから発生するイベントを購読
+            DesktopEvent.OnItemGenerated += HandleItemGenerated;
         }
 
         private void OnDestroy()
         {
             // オブジェクトが破棄されるときにイベントの購読を解除
-            CharacterCollision.OnItemGenerated -= HandleItemGenerated;
+            DesktopEvent.OnItemGenerated -= HandleItemGenerated;
         }
 
         // イベントハンドラー: アイテムが生成されたときに呼ばれる

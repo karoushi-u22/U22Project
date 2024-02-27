@@ -2,7 +2,7 @@ using UnityEngine;
 using U22Game.Handlers;
 
 namespace U22Game.Events{
-    public class CharacterCollision : MonoBehaviour
+    public class DesktopEvent : MonoBehaviour
     {
         public delegate void ItemGeneratedEventHandler(string objectName, DesktopHandler desktopHandler);
         public static event ItemGeneratedEventHandler OnItemGenerated;

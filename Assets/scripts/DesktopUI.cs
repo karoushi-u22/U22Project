@@ -14,14 +14,14 @@ namespace U22Game.UI{
             // 初期状態では画像を非表示にする
             SetImageVisibility(false);
 
-            // CharacterCollisionスクリプトから発生するイベントを購読
-            CharacterCollision.OnItemGenerated += HandleItemGenerated;
+            // DesktopEventスクリプトから発生するイベントを購読
+            DesktopEvent.OnItemGenerated += HandleItemGenerated;
         }
 
         private void OnDestroy()
         {
             // オブジェクトが破棄されるときにイベントの購読を解除
-            CharacterCollision.OnItemGenerated -= HandleItemGenerated;
+            DesktopEvent.OnItemGenerated -= HandleItemGenerated;
         }
 
         // イベントハンドラー: アイテムが生成されたときに呼ばれる
