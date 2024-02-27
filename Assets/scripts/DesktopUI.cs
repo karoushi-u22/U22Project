@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI; // UI要素を操作するために追加
 using U22Game.Handlers;
+using U22Game.Controller;
 using U22Game.Events;
 
 namespace U22Game.UI{
@@ -8,6 +9,7 @@ namespace U22Game.UI{
     {
         public Image imageToShow;
         private bool isImageVisible = false; // 画像の表示状態を管理するフラグ
+        private readonly CharacterController2D characterController; // キャラクターの移動を制御するスクリプトへの参照
 
         private void Start()
         {
@@ -29,6 +31,9 @@ namespace U22Game.UI{
         {
             // 画像を表示する
             SetImageVisibility(true);
+
+            // キャラクターの移動を制御するスクリプトを一時的に無効にする
+            characterController.enabled = false;
         }
 
         private void Update()
@@ -37,6 +42,7 @@ namespace U22Game.UI{
             if (Input.GetKeyDown(KeyCode.Escape) && isImageVisible)
             {
                 SetImageVisibility(false);
+                characterController.enabled = true;
             }
         }
 
