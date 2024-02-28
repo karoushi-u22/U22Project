@@ -1565,6 +1565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageToShow: {fileID: 1809357607}
+  characterController: {fileID: 1139586345}
 --- !u!1 &323505230
 GameObject:
   m_ObjectHideFlags: 0

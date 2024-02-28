@@ -9,7 +9,8 @@ namespace U22Game.UI{
     {
         public Image imageToShow;
         private bool isImageVisible = false; // 画像の表示状態を管理するフラグ
-        private readonly CharacterController2D characterController; // キャラクターの移動を制御するスクリプトへの参照
+        [SerializeField]
+        private CharacterController2D characterController; // キャラクターの移動を制御するスクリプトへの参照
 
         private void Start()
         {
