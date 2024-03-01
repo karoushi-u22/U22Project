@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using U22Game.Handlers;
 
 namespace U22Game.Events{
@@ -6,10 +7,12 @@ namespace U22Game.Events{
     {
         public delegate void ItemGeneratedEventHandler(string objectName, DesktopHandler desktopHandler);
         public static event ItemGeneratedEventHandler OnItemGenerated;
+        public static event UnityAction ExitDeskEvent;
 
         private DesktopHandler desktopHandler;
 
         private bool isColliding = false;
+        private bool isDeskEvent = false;
 
         private void Start()
         {
@@ -21,12 +24,19 @@ namespace U22Game.Events{
 
         private void Update()
         {
-            // Fキーが押され、かつ接触している場合にイベントを発生させる
-            if (Input.GetKeyDown(KeyCode.F) && isColliding)
+            // Fキーが押され、かつ接触している場合でイベントが発生していない時にイベントを発生させる
+            if (Input.GetKeyDown(KeyCode.F) && isColliding && !isDeskEvent)
             {
                 Debug.Log("F");
                 // イベントを発生させる
-                OnItemGenerated?.Invoke(gameObject.name, desktopHandler);
+                OnItemGenerated?.Invoke(gameObject.name, desktopData);
+                isDeskEvent = true;
+            }
+            // ESCキーが押され、かつOnItemGeneratedが発生している場合にイベントを発生させる
+            if (Input.GetKeyDown(KeyCode.Escape) && isDeskEvent)
+            {
+                ExitDeskEvent?.Invoke();
+                isDeskEvent = false;
             }
         }
 
