@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 88468933}
   - component: {fileID: 88468932}
   - component: {fileID: 88468931}
+  - component: {fileID: 88468935}
   m_Layer: 5
   m_Name: Pad UI
   m_TagString: Untagged
@@ -225,6 +226,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &88468935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 88468930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c6bdbc2c3c2ef408f41202b9449648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkboxPrefab: {fileID: 4814976757084066980, guid: 38437d5e3d264bd42a7a64801556655f, type: 3}
+  parentTransform: {fileID: 691049877}
+  checkboxTexts:
+  - test1
+  - test2
+  - test3
+  startPosition: {x: 0, y: 120}
+  spacing: {x: 0, y: -30}
 --- !u!1 &141827612
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +625,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc09e7d73623ee4bb5ffcdd0deb5219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  desktopName: PC1
+  dayData: 1
 --- !u!1 &232692724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,6 +2878,7 @@ GameObject:
   - component: {fileID: 493937631}
   - component: {fileID: 493937630}
   - component: {fileID: 493937632}
+  - component: {fileID: 493937633}
   m_Layer: 0
   m_Name: object
   m_TagString: Untagged
@@ -3718,6 +3742,20 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &493937633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493937628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc09e7d73623ee4bb5ffcdd0deb5219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desktopName: 
+  dayData: 0
 --- !u!1 &691049876
 GameObject:
   m_ObjectHideFlags: 0
@@ -4359,6 +4397,8 @@ GameObject:
   - component: {fileID: 1980499504}
   - component: {fileID: 1980499503}
   - component: {fileID: 1980499502}
+  - component: {fileID: 1980499508}
+  - component: {fileID: 1980499509}
   m_Layer: 0
   m_Name: main_character_1
   m_TagString: Untagged
@@ -4459,7 +4499,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980499501}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b1724a3d4819ebc46a3a32f24bf802f4, type: 2}
   m_CullingMode: 0
@@ -4539,6 +4579,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1980499508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980499501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972efce1622c0ca4791e52a261c677dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1980499509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980499501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6d422e37d393243b470d8fc6be08b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
