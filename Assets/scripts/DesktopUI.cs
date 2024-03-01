@@ -67,7 +67,7 @@ namespace U22Game.UI{
                 SetImageVisibility(usbImage, false);
                 SetImageVisibility(stickyNoteImage, false);
                 SetImageVisibility(softwareImage, false);
-                characterController.enabled = true;
+                characterController.enabled = false;
             }
         }
 
