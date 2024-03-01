@@ -36,23 +36,23 @@ namespace U22Game.UI{
         }
 
         // イベントハンドラー: アイテムが生成されたときに呼ばれる
-        private void HandleItemGenerated(string objectName, DesktopHandler desktopHandler)
+        private void HandleItemGenerated(string objectName, DesktopData desktopData)
         {
             // 不正なアイテムがある場合、対応する画像を設定する
-            if (desktopHandler.isBadUsb)
+            if (desktopData.IsBadUsb())
             {
                 usbImage.sprite = badusbSprite;
             }
-            else if (desktopHandler.isBadSoftware)
+            else if (desktopData.IsBadSoftware())
             {
                 softwareImage.sprite = badsoftwareSprite;
             }
 
             // 画像を表示する
             SetImageVisibility(deskPC, true);
-            SetImageVisibility(usbImage, desktopHandler.existsUsb);
-            SetImageVisibility(stickyNoteImage, desktopHandler.isBadStickyNote);
-            SetImageVisibility(softwareImage, desktopHandler.wasInstalledSoftware);
+            SetImageVisibility(usbImage, desktopData.HasUsb());
+            SetImageVisibility(stickyNoteImage, desktopData.IsBadStickyNote());
+            SetImageVisibility(softwareImage, desktopData.HasInstalledSoftware());
 
             // キャラクターの移動を制御するスクリプトを一時的に無効にする
             characterController.enabled = false;

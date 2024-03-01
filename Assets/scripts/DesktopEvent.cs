@@ -5,21 +5,23 @@ using U22Game.Handlers;
 namespace U22Game.Events{
     public class DesktopEvent : MonoBehaviour
     {
-        public delegate void ItemGeneratedEventHandler(string objectName, DesktopHandler desktopHandler);
+        public delegate void ItemGeneratedEventHandler(string objectName, DesktopData desktopData);
         public static event ItemGeneratedEventHandler OnItemGenerated;
         public static event UnityAction ExitDeskEvent;
 
-        private DesktopHandler desktopHandler;
+        [SerializeField] private string desktopName;
+        [SerializeField] private int dayData;
+
+        private SaveData saveData;
+        private DesktopData desktopData;
 
         private bool isColliding = false;
         private bool isDeskEvent = false;
 
         private void Start()
         {
-            // 各オブジェクトごとにDesktopHandlerの新しいインスタンスを作成
-            desktopHandler = new DesktopHandler();
-            // 不正なアイテムをランダムに生成
-            desktopHandler.GenerateBadItems();
+            // SaveData インスタンスを取得
+            saveData = FindObjectOfType<DataManager>().saveData;
         }
 
         private void Update()
@@ -28,6 +30,10 @@ namespace U22Game.Events{
             if (Input.GetKeyDown(KeyCode.F) && isColliding && !isDeskEvent)
             {
                 Debug.Log("F");
+
+                // デスクトップ名に対応するデスクトップデータを取得
+                desktopData = saveData.GetDesktopData(dayData, desktopName);
+
                 // イベントを発生させる
                 OnItemGenerated?.Invoke(gameObject.name, desktopData);
                 isDeskEvent = true;

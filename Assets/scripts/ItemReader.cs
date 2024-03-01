@@ -18,16 +18,16 @@ namespace U22Game.Utilities{
         }
 
         // イベントハンドラー: アイテムが生成されたときに呼ばれる
-        private void HandleItemGenerated(string objectName, DesktopHandler desktopHandler)
+        private void HandleItemGenerated(string objectName, DesktopData desktopData)
         {
             // アイテム情報とイベントが発生したオブジェクトの名前をログに出力する
             Debug.Log("イベントが発生したオブジェクト名: " + objectName);
-            Debug.Log("USBの有無: " + desktopHandler.existsUsb);
-            Debug.Log("付箋の有無: " + desktopHandler.existsStickyNote);
-            Debug.Log("インストールされたソフトウェアの有無: " + desktopHandler.wasInstalledSoftware);
-            Debug.Log("不正なUSBの有無: " + desktopHandler.isBadUsb);
-            Debug.Log("不正な付箋の有無: " + desktopHandler.isBadStickyNote);
-            Debug.Log("不正なソフトウェアの有無: " + desktopHandler.isBadSoftware);
+            Debug.Log("USBの有無: " + desktopData.HasUsb());
+            Debug.Log("付箋の有無: " + desktopData.HasStickyNote());
+            Debug.Log("インストールされたソフトウェアの有無: " + desktopData.HasInstalledSoftware());
+            Debug.Log("不正なUSBの有無: " + desktopData.IsBadUsb());
+            Debug.Log("不正な付箋の有無: " + desktopData.IsBadStickyNote());
+            Debug.Log("不正なソフトウェアの有無: " + desktopData.IsBadSoftware());
         }
     }
 }
