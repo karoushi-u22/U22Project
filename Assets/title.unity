@@ -291,8 +291,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -26, y: -0.000030517578}
-  m_SizeDelta: {x: -215.416, y: 0}
+  m_AnchoredPosition: {x: 10.1395, y: -0.000030517578}
+  m_SizeDelta: {x: -143.137, y: 0}
   m_Pivot: {x: 0.5, y: 0.49999985}
 --- !u!114 &240243544
 MonoBehaviour:
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -3.9163208, z: 0, w: 0}
+  m_margin: {x: 0, y: -3.9163208, z: 0.00012207031, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -714,7 +714,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &733580880
+--- !u!21 &1173157734
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -922,8 +922,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 648, y: 34.044}
-  m_SizeDelta: {x: 770.9396, y: 168.0874}
+  m_AnchoredPosition: {x: 611.27, y: 34.044}
+  m_SizeDelta: {x: 697.47, y: 168.0874}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1311946450
 MonoBehaviour:
@@ -981,7 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 733580880}
+  m_Material: {fileID: 1173157734}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -1054,10 +1054,10 @@ MonoBehaviour:
     - {x: 0.4755282, y: 0.15450864}
     _roundness: 50
     _roundnessBottomLeft: 50
-    _roundnessBottomRight: 50
-    _roundnessPerCorner: 0
+    _roundnessBottomRight: 0
+    _roundnessPerCorner: 1
     _roundnessTopLeft: 50
-    _roundnessTopRight: 50
+    _roundnessTopRight: 0
     _shapeType: 2
     _startAngle: 0
     _triangleOffset: 0.5
