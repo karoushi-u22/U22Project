@@ -51,6 +51,30 @@ namespace U22Game.Handlers
             daysData.Clear();
         }
 
+        // 指定した日付のすべてのデスクトップデータでチェックボックスの数を返すメソッド
+        public int GetCheckboxCount(int date)
+        {
+            // 指定した日付のデータを取得
+            DayData dayData = GetDayData(date);
+
+            // データが存在しない場合は0を返す
+            if (dayData == null)
+            {
+                return 0;
+            }
+
+            // チェックボックスの総数をカウントする変数
+            int checkboxCount = 0;
+
+            // すべてのデスクトップデータに対してチェックボックスの数をカウントする
+            foreach (var desktopData in dayData.desktopsData.Values)
+            {
+                checkboxCount += desktopData.checkboxStates.Count;
+            }
+
+            return checkboxCount;
+        }
+
         // 指定した日付のすべてのデスクトップデータでチェックボックスの状態が一致した数を返すメソッド
         public int GetMatchingCheckboxStateCount(int date)
         {
@@ -143,6 +167,22 @@ namespace U22Game.Handlers
         public void ClearDesktopData()
         {
             desktopsData.Clear();
+        }
+
+        // チェックボックスの数を返すメソッド
+        public int GetCheckboxCount(string desktopName)
+        {
+            // 指定したデスクトップ名のデスクトップデータを取得
+            DesktopData desktopData = GetDesktopData(desktopName);
+
+            // デスクトップデータが存在しない場合は0を返す
+            if (desktopData == null)
+            {
+                return 0;
+            }
+
+            // チェックボックスの数を返す
+            return desktopData.checkboxStates.Count;
         }
 
         // チェックボックスの状態が一致した数を返すメソッド
