@@ -9,7 +9,6 @@ namespace U22Game.Events{
         public static event ItemGeneratedEventHandler OnItemGenerated;
         public static event UnityAction ExitDeskEvent;
 
-        [SerializeField] private string desktopName;
         [SerializeField] private int dayData;
 
         private SaveData saveData;
@@ -28,7 +27,7 @@ namespace U22Game.Events{
                 SetupSaveDataInstance();
 
                 // デスクトップ名に対応するデスクトップデータを取得
-                desktopData = saveData.GetDesktopData(dayData, desktopName);
+                desktopData = saveData.GetDesktopData(dayData, gameObject.name);
 
                 // イベントを発生させる
                 OnItemGenerated?.Invoke(gameObject.name, desktopData);
