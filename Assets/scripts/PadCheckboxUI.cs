@@ -90,6 +90,13 @@ namespace U22Game.UI
 
                 // 生成されたチェックボックスを配列に追加
                 generatedCheckboxes[i] = checkboxGO;
+
+                // Toggle の onValueChanged イベントに保存処理を追加
+                Toggle toggle = checkboxGO.GetComponent<Toggle>();
+                if (toggle != null)
+                {
+                    toggle.onValueChanged.AddListener((isChecked) => SaveCheckboxStates());
+                }
             }
         }
 
