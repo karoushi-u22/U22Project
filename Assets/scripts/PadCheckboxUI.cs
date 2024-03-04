@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using U22Game.Handlers;
 using U22Game.Events;
 
@@ -77,7 +78,7 @@ namespace U22Game.UI
                 GameObject checkboxGO = Instantiate(checkboxPrefab, parentTransform);
 
                 // チェックボックスのテキストを設定
-                Text checkboxText = checkboxGO.GetComponentInChildren<Text>();
+                TextMeshProUGUI checkboxText = checkboxGO.GetComponentInChildren<TextMeshProUGUI>();
                 if (checkboxText != null)
                 {
                     checkboxText.text = checkboxTexts[i];
@@ -145,7 +146,7 @@ namespace U22Game.UI
                 foreach (GameObject checkboxGO in generatedCheckboxes)
                 {
                     // チェックボックスの名前を取得
-                    string checkboxName = checkboxGO.GetComponentInChildren<Text>().text;
+                    string checkboxName = checkboxGO.GetComponentInChildren<TextMeshProUGUI>().text;
 
                     // チェックボックスの状態を取得
                     Toggle toggle = checkboxGO.GetComponent<Toggle>();
@@ -153,6 +154,36 @@ namespace U22Game.UI
 
                     // チェックボックスの状態を保存
                     desktopData.SetCheckboxState(checkboxName, isChecked);
+                }
+            }
+        }
+
+        // イベントトリガーからチェックボックスの状態を変更する
+        public void ChangeCheckboxStateOnObjectClick(string objectName)
+        {
+            if (generatedCheckboxes != null)
+            {
+                for (int i = 0; i < generatedCheckboxes.Length; i++)
+                {
+                    // チェックボックスの名前を取得
+                    string checkboxName = generatedCheckboxes[i].GetComponentInChildren<TextMeshProUGUI>().text;
+
+                    // 指定されたオブジェクトに関連するチェックボックスか確認
+                    if (checkboxName == objectName)
+                    {
+                        // チェックボックスの状態を反転させる
+                        Toggle toggle = generatedCheckboxes[i].GetComponent<Toggle>();
+                        if (toggle != null)
+                        {
+                            toggle.isOn = !toggle.isOn;
+
+                            // 状態の保存
+                            SaveCheckboxStates();
+                        }
+
+                        // チェックボックスが見つかったらループを抜ける
+                        break;
+                    }
                 }
             }
         }
