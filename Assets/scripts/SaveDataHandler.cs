@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace U22Game.Handlers
@@ -49,6 +50,59 @@ namespace U22Game.Handlers
             }
             daysData.Clear();
         }
+
+        // 指定した日付のすべてのデスクトップデータでチェックボックスの状態が一致した数を返すメソッド
+        public int GetMatchingCheckboxStateCount(int date)
+        {
+            // 指定した日付のデータを取得
+            DayData dayData = GetDayData(date);
+
+            // データが存在しない場合は0を返す
+            if (dayData == null)
+            {
+                return 0;
+            }
+
+            // 一致した数をカウントする変数
+            int matchingCount = 0;
+
+            // すべてのデスクトップデータに対してチェックボックスの状態を調べる
+            foreach (var desktopData in dayData.desktopsData.Values)
+            {
+                // チェックボックスの状態が保存された配列を取得
+                bool[] checkboxStates = desktopData.checkboxStates.Values.ToArray();
+
+                // チェックボックスの状態と不正なアイテムの状態を比較し、一致している数をカウントする
+                if (checkboxStates.Length > 0 && checkboxStates[0] == desktopData.IsBadUsb())
+                {
+                    matchingCount++;
+                }
+                if (checkboxStates.Length > 1 && checkboxStates[1] == desktopData.IsBadStickyNote())
+                {
+                    matchingCount++;
+                }
+                if (checkboxStates.Length > 2 && checkboxStates[2] == desktopData.IsBadSoftware())
+                {
+                    matchingCount++;
+                }
+            }
+
+            return matchingCount;
+        }
+
+        // 指定した日付に対応するデータを取得するメソッド
+        public DayData GetDayData(int date)
+        {
+            // 指定された日付のデータを取得する
+            if (daysData.ContainsKey(date))
+            {
+                return daysData[date];
+            }
+            else
+            {
+                return null; // データが存在しない場合は null を返す
+            }
+        }
     }
 
     [Serializable]
@@ -89,6 +143,48 @@ namespace U22Game.Handlers
         public void ClearDesktopData()
         {
             desktopsData.Clear();
+        }
+
+        // チェックボックスの状態が一致した数を返すメソッド
+        public int GetMatchingCheckboxStateCount(string desktopName)
+        {
+            // 指定したデスクトップ名のデスクトップデータを取得
+            DesktopData desktopData = GetDesktopData(desktopName);
+
+            // デスクトップデータが存在しない場合は0を返す
+            if (desktopData == null)
+            {
+                return 0;
+            }
+
+            // チェックボックスの状態が保存された配列を取得
+            bool[] checkboxStates = desktopData.checkboxStates.Values.ToArray();
+
+            // チェックボックスの状態と不正なアイテムの状態を比較し、一致している数をカウントする
+            int matchingCount = 0;
+            if (checkboxStates.Length > 0)
+            {
+                if (checkboxStates[0] == desktopData.IsBadUsb())
+                {
+                    matchingCount++;
+                }
+            }
+            if (checkboxStates.Length > 1)
+            {
+                if (checkboxStates[1] == desktopData.IsBadStickyNote())
+                {
+                    matchingCount++;
+                }
+            }
+            if (checkboxStates.Length > 2)
+            {
+                if (checkboxStates[2] == desktopData.IsBadSoftware())
+                {
+                    matchingCount++;
+                }
+            }
+
+            return matchingCount;
         }
     }
 
