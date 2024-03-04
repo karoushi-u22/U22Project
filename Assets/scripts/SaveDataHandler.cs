@@ -7,6 +7,7 @@ namespace U22Game.Handlers
     [Serializable]
     public class SaveData
     {
+        public static int checkboxCnt;
         public static int successCnt;
         public static int missReportCnt;
         public static int missCnt;

@@ -13,6 +13,7 @@ namespace U22Game.Handlers{
                 saveData = dataManager.saveData;
             }
 
+            SaveData.checkboxCnt = saveData.GetCheckboxCount(dayData);
             SaveData.successCnt = saveData.GetMatchingCheckboxStateCount(dayData);
             SaveData.missReportCnt = saveData.GetMisscheckedItemsCount(dayData);
             SaveData.missCnt = saveData.GetUncheckedBadItemsCount(dayData);
