@@ -7,6 +7,10 @@ namespace U22Game.Handlers
     [Serializable]
     public class SaveData
     {
+        public static int successCnt;
+        public static int missReportCnt;
+        public static int missCnt;
+
         public Dictionary<int, DayData> daysData = new();
 
         // 日付のデータにデスクトップデータを追加するメソッド
@@ -112,6 +116,120 @@ namespace U22Game.Handlers
             }
 
             return matchingCount;
+        }
+
+        // DayData クラス内にメソッドを追加
+        public int GetUncheckedBadItemsCount(int date)
+        {
+            // 指定した日付のデスクトップデータを取得
+            DayData dayData = GetDayData(date);
+
+            // データが存在しない場合は0を返す
+            if (dayData == null)
+            {
+                return 0;
+            }
+
+            // 不正なアイテムがあるかどうかを示すフラグ
+            bool hasBadItems = false;
+
+            // 不正なアイテムがあるかどうかを確認
+            foreach (var desktopData in dayData.desktopsData.Values)
+            {
+                if (desktopData.IsBadUsb() || desktopData.IsBadStickyNote() || desktopData.IsBadSoftware())
+                {
+                    hasBadItems = true;
+                    break;
+                }
+            }
+
+            // 不正なアイテムがない場合は0を返す
+            if (!hasBadItems)
+            {
+                return 0;
+            }
+
+            // 不正なアイテムがある場合、対応するチェックボックスにチェックされていない数をカウントする
+            int uncheckedBadItemsCount = 0;
+
+            foreach (var desktopData in dayData.desktopsData.Values)
+            {
+                // チェックボックスの状態が保存された配列を取得
+                bool[] checkboxStates = desktopData.checkboxStates.Values.ToArray();
+
+                // チェックボックスの状態と不正なアイテムの状態を比較し、対応するチェックボックスにチェックされていない場合にカウントする
+                if (checkboxStates.Length > 0 && !checkboxStates[0] && desktopData.IsBadUsb())
+                {
+                    uncheckedBadItemsCount++;
+                }
+                if (checkboxStates.Length > 1 && !checkboxStates[1] && desktopData.IsBadStickyNote())
+                {
+                    uncheckedBadItemsCount++;
+                }
+                if (checkboxStates.Length > 2 && !checkboxStates[2] && desktopData.IsBadSoftware())
+                {
+                    uncheckedBadItemsCount++;
+                }
+            }
+
+            return uncheckedBadItemsCount;
+        }
+
+        // DayData クラス内にメソッドを追加
+        public int GetMisscheckedItemsCount(int date)
+        {
+            // 指定した日付のデスクトップデータを取得
+            DayData dayData = GetDayData(date);
+
+            // データが存在しない場合は0を返す
+            if (dayData == null)
+            {
+                return 0;
+            }
+
+            // 不正なアイテムがないかどうかを示すフラグ
+            bool hasNoBadItems = true;
+
+            // 不正なアイテムがあるかどうかを確認
+            foreach (var desktopData in dayData.desktopsData.Values)
+            {
+                if (desktopData.IsBadUsb() || desktopData.IsBadStickyNote() || desktopData.IsBadSoftware())
+                {
+                    hasNoBadItems = false;
+                    break;
+                }
+            }
+
+            // 不正なアイテムがある場合は0を返す
+            if (hasNoBadItems)
+            {
+                return 0;
+            }
+
+            // 不正なアイテムがない場合、対応するチェックボックスにチェックされている数をカウントする
+            int misscheckedItemsCount = 0;
+
+            foreach (var desktopData in dayData.desktopsData.Values)
+            {
+                // チェックボックスの状態が保存された配列を取得
+                bool[] checkboxStates = desktopData.checkboxStates.Values.ToArray();
+
+                // チェックボックスの状態と不正なアイテムの状態を比較し、対応するチェックボックスにチェックされている場合にカウントする
+                if (checkboxStates.Length > 0 && checkboxStates[0] && !desktopData.IsBadUsb())
+                {
+                    misscheckedItemsCount++;
+                }
+                if (checkboxStates.Length > 0 && checkboxStates[1] && !desktopData.IsBadStickyNote())
+                {
+                    misscheckedItemsCount++;
+                }
+                if (checkboxStates.Length > 0 && checkboxStates[2] && !desktopData.IsBadSoftware())
+                {
+                    misscheckedItemsCount++;
+                }
+            }
+
+            return misscheckedItemsCount;
         }
 
         // 指定した日付に対応するデータを取得するメソッド
