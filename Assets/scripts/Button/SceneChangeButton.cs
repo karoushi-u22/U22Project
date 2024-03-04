@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SceneChangeButton : MonoBehaviour
 {
     [SerializeField] Button button;
+    [SerializeField] string nextScene;
 
     private void Start()
     {
@@ -14,7 +16,6 @@ public class SceneChangeButton : MonoBehaviour
 
     public void OnClick()
     {
-        // ボタン毎の処理分けを追加
-        // シーン遷移ロジック追加
+        SceneManager.LoadScene(nextScene);
     }
 }
