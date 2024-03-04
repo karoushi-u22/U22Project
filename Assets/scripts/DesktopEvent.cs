@@ -30,8 +30,11 @@ namespace U22Game.Events{
                 desktopData = saveData.GetDesktopData(dayData, gameObject.name);
 
                 // イベントを発生させる
-                OnItemGenerated?.Invoke(gameObject.name, desktopData);
-                isDeskEvent = true;
+                if (desktopData != null)
+                {
+                    OnItemGenerated?.Invoke(gameObject.name, desktopData);
+                    isDeskEvent = true;
+                }
             }
             // ESCキーが押され、かつOnItemGeneratedが発生している場合にイベントを発生させる
             if (Input.GetKeyDown(KeyCode.Escape) && isDeskEvent)
