@@ -12,6 +12,8 @@ namespace U22Game.UI{
         [SerializeField] private Image stickyNoteImage;
         [SerializeField] private Image softwareImage;
 
+        [SerializeField] private Sprite usbSprite;
+        [SerializeField] private Sprite softwareSprite;
         [SerializeField] private Sprite badusbSprite;
         [SerializeField] private Sprite badsoftwareSprite;
 
@@ -43,9 +45,18 @@ namespace U22Game.UI{
             {
                 usbImage.sprite = badusbSprite;
             }
-            else if (desktopData.IsBadSoftware())
+            else
+            {
+                usbImage.sprite = usbSprite;
+            }
+
+            if (desktopData.IsBadSoftware())
             {
                 softwareImage.sprite = badsoftwareSprite;
+            }
+            else
+            {
+                softwareImage.sprite = softwareSprite;
             }
 
             // 画像を表示する

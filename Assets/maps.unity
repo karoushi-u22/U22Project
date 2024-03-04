@@ -2053,6 +2053,8 @@ MonoBehaviour:
   usbImage: {fileID: 933967573}
   stickyNoteImage: {fileID: 259465690}
   softwareImage: {fileID: 1403199626}
+  usbSprite: {fileID: 21300000, guid: 53b6c1735e3e5a749a331ca0572e982c, type: 3}
+  softwareSprite: {fileID: 21300000, guid: ddea210b0b4a4cb48939787aab0a3d56, type: 3}
   badusbSprite: {fileID: 21300000, guid: e39f43d28f3e331489080844af8452a0, type: 3}
   badsoftwareSprite: {fileID: 21300000, guid: 3d633664c3121b749b5108b6e1c59767, type: 3}
   characterController: {fileID: 1980499504}
