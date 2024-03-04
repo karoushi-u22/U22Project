@@ -19,7 +19,7 @@ namespace U22Game.Utilities{
                 if (child.gameObject.name.StartsWith(objectName))
                 {
                     // 子オブジェクトにスクリプトをアタッチ
-                    child.gameObject.AddComponent<DesktopEvent>().dayData = 1;
+                    child.gameObject.AddComponent<DesktopEvent>().dayData = dayData;
                 }
             }
         }
