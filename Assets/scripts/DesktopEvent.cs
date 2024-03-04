@@ -18,18 +18,14 @@ namespace U22Game.Events{
         private bool isColliding = false;
         private bool isDeskEvent = false;
 
-        private void Start()
-        {
-            // SaveData インスタンスを取得
-            saveData = FindObjectOfType<DataManager>().saveData;
-        }
-
         private void Update()
         {
             // Fキーが押され、かつ接触している場合でイベントが発生していない時にイベントを発生させる
             if (Input.GetKeyDown(KeyCode.F) && isColliding && !isDeskEvent)
             {
                 Debug.Log("F");
+
+                SetupSaveDataInstance();
 
                 // デスクトップ名に対応するデスクトップデータを取得
                 desktopData = saveData.GetDesktopData(dayData, desktopName);
@@ -56,6 +52,17 @@ namespace U22Game.Events{
         {
             // 接触が終了したらフラグを下げる
             isColliding = false;
+        }
+
+        // データを読み取るための SaveData インスタンスをセットアップ
+        private void SetupSaveDataInstance()
+        {
+            // DataManager オブジェクトを探して、その SaveData インスタンスを取得
+            DataManager dataManager = FindObjectOfType<DataManager>();
+            if (dataManager != null)
+            {
+                saveData = dataManager.saveData;
+            }
         }
     }
 }
