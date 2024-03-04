@@ -11,7 +11,7 @@ public class DataManager : MonoBehaviour
         saveData = new SaveData();
 
         // Day1 のデータを生成する
-        GenerateDayData(1, 4); // 1日目に4台のPCを生成
+        GenerateDayData(1, 6); // 1日目に6台のPCを生成
 
         // Day2 のデータを生成する
         GenerateDayData(2, 6); // 2日目に6台のPCを生成

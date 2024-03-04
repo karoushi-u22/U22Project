@@ -9,7 +9,7 @@ namespace U22Game.Events{
         public static event ItemGeneratedEventHandler OnItemGenerated;
         public static event UnityAction ExitDeskEvent;
 
-        [SerializeField] private int dayData;
+        public int dayData;
 
         private SaveData saveData;
         private DesktopData desktopData;
