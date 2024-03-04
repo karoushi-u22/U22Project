@@ -48,10 +48,7 @@ namespace U22Game.Handlers
             {
                 isBadUsb = RandomUtil.GetRandomBool();
             }
-            if (existsStickyNote)
-            {
-                isBadStickyNote = RandomUtil.GetRandomBool();
-            }
+            isBadStickyNote = existsStickyNote;
             if (wasInstalledSoftware)
             {
                 isBadSoftware = RandomUtil.GetRandomBool();
