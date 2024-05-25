@@ -1,78 +1,83 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using U22Game.Handlers;
 
-public class SetResultScore : MonoBehaviour
+namespace U22Game.Handlers
 {
-    // テキストを変更したい子オブジェクトの参照を配列として持つ
-    [SerializeField] private TextMeshProUGUI[] textObjects;
-    [SerializeField] private Image succesLank;
-    [SerializeField] private Sprite lankS;
-    [SerializeField] private int lankSRate;
-    [SerializeField] private Sprite lankA;
-    [SerializeField] private int lankARate;
-    [SerializeField] private Sprite lankB;
-    [SerializeField] private int lankBRate;
-    [SerializeField] private Sprite lankC;
-
-    // 新しいテキストを設定するメソッド
-    public void SetTextResultScore()
+    public class SetResultScore : MonoBehaviour
     {
-        foreach (TextMeshProUGUI textObject in textObjects)
+        // テキストを変更したい子オブジェクトの参照を配列として持つ
+        [SerializeField] private TextMeshProUGUI[] textObjects;
+        [SerializeField] private Image succesLank;
+        [SerializeField] private Sprite lankS;
+        [SerializeField] private int lankSRate;
+        [SerializeField] private Sprite lankA;
+        [SerializeField] private int lankARate;
+        [SerializeField] private Sprite lankB;
+        [SerializeField] private int lankBRate;
+        [SerializeField] private Sprite lankC;
+
+        private SaveDataHandler saveData;
+
+        // 新しいテキストを設定するメソッド
+        public void SetTextResultScore(SaveDataHandler saveData)
         {
-            if (textObject != null)
+            foreach (TextMeshProUGUI textObject in textObjects)
             {
-                if (textObject.gameObject.name == "SuccesCNT")
+                if (textObject != null)
                 {
-                    textObject.text = SaveData.successCnt.ToString();
+                    if (textObject.gameObject.name == "SuccesCNT")
+                    {
+                        textObject.text = saveData.SuccessCnt.ToString();
+                    }
+                    else if (textObject.gameObject.name == "MissReportCNT")
+                    {
+                        textObject.text = saveData.MissReportCnt.ToString();
+                    }
+                    else if (textObject.gameObject.name == "MissCNT")
+                    {
+                        textObject.text = saveData.MissCnt.ToString();
+                    }
                 }
-                else if (textObject.gameObject.name == "MissReportCNT")
+                else
                 {
-                    textObject.text = SaveData.missReportCnt.ToString();
-                }
-                else if (textObject.gameObject.name == "MissCNT")
-                {
-                    textObject.text = SaveData.missCnt.ToString();
+                    Debug.LogError("TextMeshProUGUIオブジェクトが見つかりません。");
                 }
             }
-            else
+        }
+
+        // 正答率でクリアランク画像を変更するメソッド
+        public void SetClearLankImage(SaveDataHandler saveData)
+        {
+            float checkboxCnt = saveData.CheckboxCnt;
+            float successCnt = saveData.SuccessCnt;
+
+            float successRate = successCnt / checkboxCnt * 100;
+
+            if (successRate >= lankSRate)
             {
-                Debug.LogError("TextMeshProUGUIオブジェクトが見つかりません。");
+                succesLank.sprite = lankS;
+            }
+            else if (successRate >= lankARate)
+            {
+                succesLank.sprite = lankA;
+            }
+            else if (successRate >= lankBRate)
+            {
+                succesLank.sprite = lankB;
+            }
+            else if (successRate >= 0)
+            {
+                succesLank.sprite = lankC;
             }
         }
-    }
 
-    // 正答率でクリアランク画像を変更するメソッド
-    public void SetClearLankImage()
-    {
-        float checkboxCnt =  SaveData.checkboxCnt;
-        float successCnt = SaveData.successCnt;
-
-        float successRate = successCnt / checkboxCnt * 100;
-
-        if (successRate >= lankSRate)
+        // 例: Start() メソッドで全てのテキストを変更する場合
+        private void Start()
         {
-            succesLank.sprite = lankS;
+            saveData = JsonSaveLoadHandler.LoadFromJson();
+            SetTextResultScore(saveData);
+            SetClearLankImage(saveData);
         }
-        else if (successRate >= lankARate)
-        {
-            succesLank.sprite = lankA;
-        }
-        else if (successRate >= lankBRate)
-        {
-            succesLank.sprite = lankB;
-        }
-        else if (successRate >= 0)
-        {
-            succesLank.sprite = lankC;
-        }
-    }
-
-    // 例: Start() メソッドで全てのテキストを変更する場合
-    private void Start()
-    {
-        SetTextResultScore();
-        SetClearLankImage();
     }
 }

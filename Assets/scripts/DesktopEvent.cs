@@ -5,14 +5,14 @@ using U22Game.Handlers;
 namespace U22Game.Events{
     public class DesktopEvent : MonoBehaviour
     {
-        public delegate void ItemGeneratedEventHandler(string objectName, DesktopData desktopData);
+        public delegate void ItemGeneratedEventHandler(string objectName, DesktopHandler desktopData);
         public static event ItemGeneratedEventHandler OnItemGenerated;
         public static event UnityAction ExitDeskEvent;
 
         public int dayData;
 
-        private SaveData saveData;
-        private DesktopData desktopData;
+        private SaveDataHandler saveData;
+        private DesktopHandler desktopData;
 
         private bool isColliding = false;
         private bool isDeskEvent = false;
@@ -47,6 +47,8 @@ namespace U22Game.Events{
                 Debug.Log(saveData.GetMatchingCheckboxStateCount(1) + " / " + saveData.GetCheckboxCount(1));
                 Debug.Log(saveData.GetMisscheckedItemsCount(1));
                 Debug.Log(saveData.GetUncheckedBadItemsCount(1));
+
+                JsonSaveLoadHandler.SaveToJson(saveData);
             }
         }
 

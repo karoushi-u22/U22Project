@@ -3,7 +3,7 @@ using UnityEngine;
 namespace U22Game.Handlers{
     public class SaveScoreHandler : MonoBehaviour
     {
-        private SaveData saveData;
+        private SaveDataHandler saveData;
 
         public void SaveScore(int dayData){
             // DataManager オブジェクトを探して、その SaveData インスタンスを取得
@@ -13,10 +13,10 @@ namespace U22Game.Handlers{
                 saveData = dataManager.saveData;
             }
 
-            SaveData.checkboxCnt = saveData.GetCheckboxCount(dayData);
-            SaveData.successCnt = saveData.GetMatchingCheckboxStateCount(dayData);
-            SaveData.missReportCnt = saveData.GetMisscheckedItemsCount(dayData);
-            SaveData.missCnt = saveData.GetUncheckedBadItemsCount(dayData);
+            saveData.CheckboxCnt = saveData.GetCheckboxCount(dayData);
+            saveData.SuccessCnt = saveData.GetMatchingCheckboxStateCount(dayData);
+            saveData.MissReportCnt = saveData.GetMisscheckedItemsCount(dayData);
+            saveData.MissCnt = saveData.GetUncheckedBadItemsCount(dayData);
         }
     }
 }

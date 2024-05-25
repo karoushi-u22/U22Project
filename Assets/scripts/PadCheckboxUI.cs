@@ -17,8 +17,8 @@ namespace U22Game.UI
 
         private GameObject[] generatedCheckboxes; // 生成されたチェックボックスを保持する配列
 
-        private SaveData saveData; // SaveData インスタンスを保持する変数
-        private DesktopData desktopData;
+        private SaveDataHandler saveData; // SaveData インスタンスを保持する変数
+        private DesktopHandler desktopData;
 
         private void OnEnable()
         {
@@ -43,7 +43,7 @@ namespace U22Game.UI
             }
         }
 
-        private void HandleItemGenerated(string objectName, DesktopData desktopData)
+        private void HandleItemGenerated(string objectName, DesktopHandler desktopData)
         {
             this.desktopData = desktopData;
             // チェックボックスを生成する
@@ -125,7 +125,7 @@ namespace U22Game.UI
         }
 
         // 保存されたチェックボックスの状態を読み込む
-        private void LoadCheckboxStates(DesktopData desktopData)
+        private void LoadCheckboxStates(DesktopHandler desktopData)
         {
             if (desktopData != null)
             {
