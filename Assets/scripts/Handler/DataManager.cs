@@ -17,7 +17,7 @@ namespace U22Game.Handlers
             // Day2 のデータを生成する
             GenerateDayData(2, 6); // 2日目に6台のPCを生成
 
-            JsonIoHandler.SaveToJson(saveData);
+            JsonSaveLoadHandler.SaveToJson(saveData);
         }
 
         // 指定された日付に指定された数のデスクトップデータを生成するメソッド

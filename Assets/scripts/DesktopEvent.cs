@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using U22Game.Handlers;
 
-namespace U22Game.Events
-{
+namespace U22Game.Events{
     public class DesktopEvent : MonoBehaviour
     {
         public delegate void ItemGeneratedEventHandler(string objectName, DesktopHandler desktopData);
@@ -44,12 +43,12 @@ namespace U22Game.Events
                 isDeskEvent = false;
 
                 Debug.Log("正答数");
-                Debug.Log(gameObject.name + "の正答率 : " + saveData.GetDayData(1).GetMatchingCheckboxStateCount(gameObject.name) + " / " + saveData.GetDayData(1).GetCheckboxCount(gameObject.name));
-                Debug.Log("全体の正答率 : " + saveData.GetMatchingCheckboxStateCount(1) + " / " + saveData.GetCheckboxCount(1));
-                Debug.Log("全体の誤答数 : " + saveData.GetMisscheckedItemsCount(1));
-                Debug.Log("全体の見逃した数 : " + saveData.GetUncheckedBadItemsCount(1));
+                Debug.Log(saveData.GetDayData(1).GetMatchingCheckboxStateCount(gameObject.name) + " / " + saveData.GetDayData(1).GetCheckboxCount(gameObject.name));
+                Debug.Log(saveData.GetMatchingCheckboxStateCount(1) + " / " + saveData.GetCheckboxCount(1));
+                Debug.Log(saveData.GetMisscheckedItemsCount(1));
+                Debug.Log(saveData.GetUncheckedBadItemsCount(1));
 
-                JsonIoHandler.SaveToJson(saveData);
+                JsonSaveLoadHandler.SaveToJson(saveData);
             }
         }
 

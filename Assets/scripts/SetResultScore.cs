@@ -75,7 +75,7 @@ namespace U22Game.Handlers
         // 例: Start() メソッドで全てのテキストを変更する場合
         private void Start()
         {
-            saveData = JsonIoHandler.LoadFromJson();
+            saveData = JsonSaveLoadHandler.LoadFromJson();
             SetTextResultScore(saveData);
             SetClearLankImage(saveData);
         }
