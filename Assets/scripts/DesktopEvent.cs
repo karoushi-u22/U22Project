@@ -48,7 +48,7 @@ namespace U22Game.Events{
                 Debug.Log(saveData.GetMisscheckedItemsCount(1));
                 Debug.Log(saveData.GetUncheckedBadItemsCount(1));
 
-                JsonSaveLoadHandler.SaveToJson(saveData);
+                JsonIoHandler.SaveToJson(saveData);
             }
         }
 
