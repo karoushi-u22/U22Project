@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace U22Game.Handlers
 {
-    public static class JsonSaveLoadHandler
+    public static class JsonIoHandler
     {
         public static readonly string saveFileName = "saveData.json";
 
