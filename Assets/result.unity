@@ -589,6 +589,7 @@ GameObject:
   - component: {fileID: 698898460}
   - component: {fileID: 698898459}
   - component: {fileID: 698898458}
+  - component: {fileID: 698898463}
   m_Layer: 0
   m_Name: Button (1)
   m_TagString: Untagged
@@ -736,6 +737,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698898456}
   m_CullTransparentMesh: 1
+--- !u!114 &698898463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698898456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98be31b30af24d408383183260e58b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMoveButton: {fileID: 306192445}
+  newPosition: {x: 0, y: -470}
 --- !u!1 &841405861
 GameObject:
   m_ObjectHideFlags: 0
