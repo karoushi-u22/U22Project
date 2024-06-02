@@ -67,12 +67,7 @@ namespace U22Game.Events{
         // データを読み取るための SaveData インスタンスをセットアップ
         private void SetupSaveDataInstance()
         {
-            // DataManager オブジェクトを探して、その SaveData インスタンスを取得
-            DataManager dataManager = FindObjectOfType<DataManager>();
-            if (dataManager != null)
-            {
-                saveData = dataManager.saveData;
-            }
+            saveData = JsonIoHandler.LoadFromJson();
         }
     }
 }
