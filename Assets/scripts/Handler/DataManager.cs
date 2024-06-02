@@ -20,6 +20,15 @@ namespace U22Game.Handlers
             JsonIoHandler.SaveToJson(saveData);
         }
 
+        public void ChangeNextDate()
+        {
+            saveData = JsonIoHandler.LoadFromJson();
+
+            saveData.CurrentDate++;
+
+            JsonIoHandler.SaveToJson(saveData);
+        }
+
         // 指定された日付に指定された数のデスクトップデータを生成するメソッド
         void GenerateDayData(int date, int desktopCount)
         {
