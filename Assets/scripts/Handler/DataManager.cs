@@ -6,7 +6,7 @@ namespace U22Game.Handlers
     {
         public SaveDataHandler saveData; // SaveData インスタンスを保持する変数
 
-        void Start()
+        public void GenerateSaveData()
         {
             // 初期化された SaveData インスタンスを生成
             saveData = new SaveDataHandler();
