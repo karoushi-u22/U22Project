@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 698898460}
-  nextScene: text
+  nextScene: ShowDate
 --- !u!114 &698898460
 MonoBehaviour:
   m_ObjectHideFlags: 0
