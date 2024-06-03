@@ -7,6 +7,7 @@ namespace U22Game.Handlers
     [Serializable]
     public class SaveDataHandler
     {
+        public int CurrentDate { get; set; } = 1;
         public int CheckboxCnt { get; set; }
         public int SuccessCnt { get; set; }
         public int MissReportCnt { get; set; }

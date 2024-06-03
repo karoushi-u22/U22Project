@@ -36,11 +36,7 @@ namespace U22Game.UI
         private void SetupSaveDataInstance()
         {
             // DataManager オブジェクトを探して、その SaveData インスタンスを取得
-            DataManager dataManager = FindObjectOfType<DataManager>();
-            if (dataManager != null)
-            {
-                saveData = dataManager.saveData;
-            }
+            saveData = JsonIoHandler.LoadFromJson();
         }
 
         private void HandleItemGenerated(string objectName, DesktopHandler desktopData)

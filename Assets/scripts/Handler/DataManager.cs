@@ -6,7 +6,7 @@ namespace U22Game.Handlers
     {
         public SaveDataHandler saveData; // SaveData インスタンスを保持する変数
 
-        void Start()
+        public void GenerateSaveData()
         {
             // 初期化された SaveData インスタンスを生成
             saveData = new SaveDataHandler();
@@ -16,6 +16,15 @@ namespace U22Game.Handlers
 
             // Day2 のデータを生成する
             GenerateDayData(2, 6); // 2日目に6台のPCを生成
+
+            JsonIoHandler.SaveToJson(saveData);
+        }
+
+        public void ChangeNextDate()
+        {
+            saveData = JsonIoHandler.LoadFromJson();
+
+            saveData.CurrentDate++;
 
             JsonIoHandler.SaveToJson(saveData);
         }
