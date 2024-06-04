@@ -449,7 +449,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachObjectName: PC
-  dayData: 1
 --- !u!1 &185487021
 GameObject:
   m_ObjectHideFlags: 0
@@ -4882,7 +4881,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1314644693}
         m_TargetAssemblyTypeName: U22Game.Handlers.SaveScoreHandler, Assembly-CSharp
         m_MethodName: SaveScore
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
