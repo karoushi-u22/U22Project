@@ -3,29 +3,59 @@ using TMPro;
 
 namespace U22Game.Handlers {
     public class TextboxHandler : MonoBehaviour {
-        public TextMeshProUGUI textField; // TextMeshProのUI Textコンポーネントを使用
+        public TextMeshProUGUI textName;  // 現在セリフを表示させている人物名
+        public TextMeshProUGUI textField; // セリフの内容
+        public GameObject textFlame; // テキストフレームの画像オブジェクト
 
         // 表示されるテキスト制御のメソッド
-        public void DisplayText(string newText) {
-            // UI Textのテキストを新しいテキストに設定
+        public void DisplayText(string characterName, string dialogue) {
+            textName.text = characterName;
+            textField.text = dialogue;
+        }
+
+        // TextNameの文字を変更するメソッド
+        public void ChangeTextName(string newText) {
+            textName.text = newText;
+        }
+
+        // TextFieldの文字を変更するメソッド
+        public void ChangeTextField(string newText) {
             textField.text = newText;
         }
 
-        // テキストを変更するメソッド
-        public void ChangeText(string newText) {
-            DisplayText(newText);
+        // textNameの表示・非表示を切り替えるメソッド
+        public void ToggleTextName(bool isVisible) {
+            if (textName != null) {
+                CanvasRenderer nameRenderer = textName.GetComponent<CanvasRenderer>();
+                if (nameRenderer != null) {
+                    nameRenderer.SetAlpha(isVisible ? 1.0f : 0.0f);
+                }
+            } else {
+                Debug.LogError("textNameが割り当てられていません。");
+            }
         }
 
-        // テキストボックスの表示・非表示を切り替えるメソッド
-        public void ToggleTextbox(bool isVisible) {
+        // textFieldの表示・非表示を切り替えるメソッド
+        public void ToggleTextField(bool isVisible) {
             if (textField != null) {
-                // 透明度を設定して表示・非表示を切り替える
-                CanvasRenderer canvasRenderer = textField.GetComponent<CanvasRenderer>();
-                if (canvasRenderer != null) {
-                    canvasRenderer.SetAlpha(isVisible ? 1.0f : 0.0f);
+                CanvasRenderer fieldRenderer = textField.GetComponent<CanvasRenderer>();
+                if (fieldRenderer != null) {
+                    fieldRenderer.SetAlpha(isVisible ? 1.0f : 0.0f);
                 }
             } else {
                 Debug.LogError("textFieldが割り当てられていません。");
+            }
+        }
+
+        // textFlameの表示・非表示を切り替えるメソッド
+        public void ToggleTextFlame(bool isVisible) {
+            if (textFlame != null) {
+                CanvasRenderer flameRenderer = textFlame.GetComponent<CanvasRenderer>();
+                if (flameRenderer != null) {
+                    flameRenderer.SetAlpha(isVisible ? 1.0f : 0.0f);
+                }
+            } else {
+                Debug.LogError("textFlameが割り当てられていません。");
             }
         }
     }
