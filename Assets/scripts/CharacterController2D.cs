@@ -35,6 +35,7 @@
 
                 // 移動ベクトルに速度を掛けて移動させる
                 rb.velocity = movementInput * moveSpeed;
+                animator.keepAnimatorStateOnDisable = true;
 
                 // アニメーションの設定
                 if (movementInput != Vector2.zero)
@@ -42,12 +43,10 @@
                     animator.SetFloat("Horizontal", movementInput.x);
                     animator.SetFloat("Vertical", movementInput.y);
                     animator.SetBool("IsMoving", true);
-                    animator.enabled = true;
                 }
                 else
                 {
                     animator.SetBool("IsMoving", false);
-                    animator.enabled = false;
                 }
             }
         }
