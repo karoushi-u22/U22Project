@@ -5,18 +5,16 @@ namespace U22Game.Handlers{
     {
         private SaveDataHandler saveData;
 
-        public void SaveScore(int dayData){
+        public void SaveScore(){
             // DataManager オブジェクトを探して、その SaveData インスタンスを取得
-            DataManager dataManager = FindObjectOfType<DataManager>();
-            if (dataManager != null)
-            {
-                saveData = dataManager.saveData;
-            }
+            saveData = JsonIoHandler.LoadFromJson();
 
-            saveData.CheckboxCnt = saveData.GetCheckboxCount(dayData);
-            saveData.SuccessCnt = saveData.GetMatchingCheckboxStateCount(dayData);
-            saveData.MissReportCnt = saveData.GetMisscheckedItemsCount(dayData);
-            saveData.MissCnt = saveData.GetUncheckedBadItemsCount(dayData);
+            saveData.CheckboxCnt = saveData.GetCheckboxCount(saveData.CurrentDate);
+            saveData.SuccessCnt = saveData.GetMatchingCheckboxStateCount(saveData.CurrentDate);
+            saveData.MissReportCnt = saveData.GetMisscheckedItemsCount(saveData.CurrentDate);
+            saveData.MissCnt = saveData.GetUncheckedBadItemsCount(saveData.CurrentDate);
+
+            JsonIoHandler.SaveToJson(saveData);
         }
     }
 }
