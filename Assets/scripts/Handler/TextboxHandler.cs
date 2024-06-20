@@ -50,10 +50,19 @@ namespace U22Game.Handlers
                 // マウスクリックまたはEnterキー押下を検出
                 if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
                 {
+                    int length = textfieldMain.text.Length;
+
                     // setTextCoroutineが終了したとき
                     if (setTextCoroutine == null)
                     {
                         TextboxClickEvent?.Invoke(this);
+                    }
+                    // テキストが全て表示されていないとき、コルーチンを停止しテキストを全て表示する
+                    else if (textfieldMain.maxVisibleCharacters < length)
+                    {
+                        StopCoroutine(setTextCoroutine);
+                        setTextCoroutine = null;
+                        textfieldMain.maxVisibleCharacters = length;
                     }
                 }
             }
