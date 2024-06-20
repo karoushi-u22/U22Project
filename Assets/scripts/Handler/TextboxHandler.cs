@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -6,8 +7,11 @@ namespace U22Game.Handlers
     public class TextboxHandler : MonoBehaviour
     {
         private Canvas textbox;
+        private Coroutine setTextCoroutine;
         [SerializeField] private TextMeshProUGUI textfieldMain;
         [SerializeField] private TextMeshProUGUI textfieldPlayerName;
+        [SerializeField] private float delayStart = 0.5f;  // 最初の文字を表示するまでの時間
+        [SerializeField] private float delayDuration = 0.1f;  // 次の文字を表示するまでの時間
 
         private void Start()
         {
@@ -30,6 +34,38 @@ namespace U22Game.Handlers
 
             // 初期値はTextbox非表示
             HideTextbox();
+
+        // 一文字ずつテキストをセットするコルーチン
+        private IEnumerator SetTextCoroutine(TextMeshProUGUI textMeshPro, string newText)
+        {
+            textMeshPro.maxVisibleCharacters = 0;
+
+            yield return new WaitForSeconds(delayStart);
+
+            if (textfieldMain != null)
+            {
+                textfieldMain.text = newText;
+            }
+
+            int length = textMeshPro.text.Length;
+            for (int i = 0; i < length; i++)
+            {
+                textMeshPro.maxVisibleCharacters = i + 1;
+
+                // 改行がある場合、Delayを多く取る
+                if (textMeshPro.text[i] == '\n')
+                {
+                    yield return new WaitForSeconds(delayDuration * 10);
+                }
+                else
+                {
+                    yield return new WaitForSeconds(delayDuration);
+                }
+            }
+
+            textMeshPro.maxVisibleCharacters = length;
+
+            setTextCoroutine = null;
         }
 
         // Textboxを表示するメソッド
@@ -53,10 +89,12 @@ namespace U22Game.Handlers
         // TextMeshProの1つ目のテキストを変更するメソッド
         public void SetTextMain(string newText)
         {
-            if (textfieldMain != null)
+            if (setTextCoroutine != null)
             {
-                textfieldMain.text = newText;
+                StopCoroutine(setTextCoroutine);
             }
+
+            setTextCoroutine = StartCoroutine(SetTextCoroutine(textfieldMain, newText));
         }
 
         // TextMeshProの2つ目のテキストを変更するメソッド
