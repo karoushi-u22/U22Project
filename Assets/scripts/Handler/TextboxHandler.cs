@@ -1,11 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 namespace U22Game.Handlers
 {
     public class TextboxHandler : MonoBehaviour
     {
+        public static event UnityAction<TextboxHandler> StartTextboxEvent;
+        public static event UnityAction<TextboxHandler> TextboxClickEvent;
         private Canvas textbox;
         private Coroutine setTextCoroutine;
         [SerializeField] private TextMeshProUGUI textfieldMain;
@@ -34,6 +37,27 @@ namespace U22Game.Handlers
 
             // 初期値はTextbox非表示
             HideTextbox();
+
+            // Textbox読み込み完了時にイベントを発火
+            StartTextboxEvent?.Invoke(this);
+        }
+
+        private void Update()
+        {
+            // Textbox表示されているとき
+            if (textbox.enabled)
+            {
+                // マウスクリックまたはEnterキー押下を検出
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
+                {
+                    // setTextCoroutineが終了したとき
+                    if (setTextCoroutine == null)
+                    {
+                        TextboxClickEvent?.Invoke(this);
+                    }
+                }
+            }
+        }
 
         // 一文字ずつテキストをセットするコルーチン
         private IEnumerator SetTextCoroutine(TextMeshProUGUI textMeshPro, string newText)
