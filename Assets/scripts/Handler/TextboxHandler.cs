@@ -9,6 +9,7 @@ namespace U22Game.Handlers
     {
         public static event UnityAction<TextboxHandler> StartTextboxEvent;
         public static event UnityAction TextboxClickEvent;
+        private bool waitFlag = false;
         private Canvas textbox;
         private Coroutine setTextCoroutine;
         [SerializeField] private TextMeshProUGUI textfieldMain;
@@ -58,7 +59,7 @@ namespace U22Game.Handlers
                         TextboxClickEvent?.Invoke();
                     }
                     // テキストが全て表示されていないとき、コルーチンを停止しテキストを全て表示する
-                    else if (textfieldMain.maxVisibleCharacters < length)
+                    else if (!waitFlag && textfieldMain.maxVisibleCharacters < length)
                     {
                         StopCoroutine(setTextCoroutine);
                         setTextCoroutine = null;
@@ -71,14 +72,16 @@ namespace U22Game.Handlers
         // 一文字ずつテキストをセットするコルーチン
         private IEnumerator SetTextCoroutine(TextMeshProUGUI textMeshPro, string newText)
         {
+            waitFlag = true;
             textMeshPro.maxVisibleCharacters = 0;
-
-            yield return new WaitForSeconds(delayStart);
 
             if (textfieldMain != null)
             {
                 textfieldMain.text = newText;
             }
+
+            yield return new WaitForSeconds(delayStart);
+            waitFlag = false;
 
             int length = textMeshPro.text.Length;
             for (int i = 0; i < length; i++)
