@@ -8,7 +8,7 @@ namespace U22Game.Handlers
     public class TextboxHandler : MonoBehaviour
     {
         public static event UnityAction<TextboxHandler> StartTextboxEvent;
-        public static event UnityAction<TextboxHandler> TextboxClickEvent;
+        public static event UnityAction TextboxClickEvent;
         private Canvas textbox;
         private Coroutine setTextCoroutine;
         [SerializeField] private TextMeshProUGUI textfieldMain;
@@ -55,7 +55,7 @@ namespace U22Game.Handlers
                     // setTextCoroutineが終了したとき
                     if (setTextCoroutine == null)
                     {
-                        TextboxClickEvent?.Invoke(this);
+                        TextboxClickEvent?.Invoke();
                     }
                     // テキストが全て表示されていないとき、コルーチンを停止しテキストを全て表示する
                     else if (textfieldMain.maxVisibleCharacters < length)
