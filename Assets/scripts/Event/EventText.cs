@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace U22Game.Events
     [Serializable]
     public class EventText
     {
+        private static readonly string eventFolderPath = "StoryEvents";  // イベントファイルが入っているフォルダパス(Assetsフォルダ以降のパス)
         public string text { get; set; }            // テキスト
         public string sender { get; set; }          // 送信者
         public string highlight { get; set; }       // ハイライト対象のオブジェクトID
@@ -23,11 +25,18 @@ namespace U22Game.Events
         }
 
         // JSONからEventTextのリストを読み込む静的メソッド
-        public static List<EventText> FromJson(string jsonString)
+        public static List<EventText> FromJson(string jsonFilePath)
         {
             try
             {
-                return JsonSerializer.Deserialize<List<EventText>>(jsonString);
+                jsonFilePath = Path.Combine(Application.dataPath, eventFolderPath, jsonFilePath);
+                Debug.Log("path: " + jsonFilePath);
+
+                StreamReader reader = new(jsonFilePath);
+                string jsonData = reader.ReadToEnd();
+                reader.Close();
+
+                return JsonSerializer.Deserialize<List<EventText>>(jsonData);
             }
             catch (JsonException ex)
             {
