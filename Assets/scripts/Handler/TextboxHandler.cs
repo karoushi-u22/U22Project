@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +13,7 @@ namespace U22Game.Handlers
         private bool waitFlag = false;
         private Canvas textbox;
         private Coroutine setTextCoroutine;
+        private Coroutine waitSkipCoroutine;
         [SerializeField] private TextMeshProUGUI textfieldMain;
         [SerializeField] private TextMeshProUGUI textfieldPlayerName;
         [SerializeField] private float delayStart = 0.5f;  // 最初の文字を表示するまでの時間
@@ -57,6 +59,12 @@ namespace U22Game.Handlers
                     if (setTextCoroutine == null)
                     {
                         TextboxClickEvent?.Invoke();
+
+                        if (waitSkipCoroutine != null)
+                        {
+                            StopCoroutine(waitSkipCoroutine);
+                            waitSkipCoroutine = null;
+                        }
                     }
                     // テキストが全て表示されていないとき、コルーチンを停止しテキストを全て表示する
                     else if (!waitFlag && textfieldMain.maxVisibleCharacters < length)
@@ -70,9 +78,8 @@ namespace U22Game.Handlers
         }
 
         // 一文字ずつテキストをセットするコルーチン
-        private IEnumerator SetTextCoroutine(TextMeshProUGUI textMeshPro, string newText)
+        private IEnumerator SetTextCoroutine(TextMeshProUGUI textMeshPro, string newText, int delaySkip)
         {
-            waitFlag = true;
             textMeshPro.maxVisibleCharacters = 0;
 
             if (textfieldMain != null)
@@ -80,8 +87,8 @@ namespace U22Game.Handlers
                 textfieldMain.text = newText;
             }
 
+            waitSkipCoroutine = StartCoroutine(WaitSkipCoroutine(delaySkip));
             yield return new WaitForSeconds(delayStart);
-            waitFlag = false;
 
             int length = textMeshPro.text.Length;
             for (int i = 0; i < length; i++)
@@ -104,6 +111,17 @@ namespace U22Game.Handlers
             setTextCoroutine = null;
         }
 
+        private IEnumerator WaitSkipCoroutine(int delaySkip)
+        {
+            waitFlag = true;
+
+            Debug.Log($"Wait Time: {Math.Max(delayStart, delaySkip)}");
+            yield return new WaitForSeconds(Math.Max(delayStart, delaySkip));
+
+            Debug.Log("Skip Available");
+            waitFlag = false;
+        }
+
         // Textboxを表示するメソッド
         public void ShowTextbox()
         {
@@ -123,14 +141,14 @@ namespace U22Game.Handlers
         }
 
         // TextMeshProの1つ目のテキストを変更するメソッド
-        public void SetTextMain(string newText)
+        public void SetTextMain(string newText, int delaySkip)
         {
             if (setTextCoroutine != null)
             {
                 StopCoroutine(setTextCoroutine);
             }
 
-            setTextCoroutine = StartCoroutine(SetTextCoroutine(textfieldMain, newText));
+            setTextCoroutine = StartCoroutine(SetTextCoroutine(textfieldMain, newText, delaySkip));
         }
 
         // TextMeshProの2つ目のテキストを変更するメソッド
