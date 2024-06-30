@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using U22Game.Handlers;
@@ -14,6 +15,8 @@ namespace U22Game.UI
 
         [SerializeField] private Vector2 startPosition; // チェックボックスの開始位置
         [SerializeField] private Vector2 spacing; // チェックボックスの間隔
+
+        public static event UnityAction ChangeCheckboxEvent;
 
         private GameObject[] generatedCheckboxes; // 生成されたチェックボックスを保持する配列
 
@@ -114,6 +117,7 @@ namespace U22Game.UI
                 {
                     toggle.onValueChanged.AddListener(isOn => {
                         SaveCheckboxStates();
+                        ChangeCheckboxEvent.Invoke();
                     });
                 }
             }
@@ -143,16 +147,16 @@ namespace U22Game.UI
         private void SaveCheckboxStates()
         {
             foreach (GameObject checkboxGO in generatedCheckboxes)
-                {
-                    // チェックボックスの名前を取得
-                    string checkboxName = checkboxGO.GetComponentInChildren<TextMeshProUGUI>().text;
+            {
+                // チェックボックスの名前を取得
+                string checkboxName = checkboxGO.GetComponentInChildren<TextMeshProUGUI>().text;
 
-                    // チェックボックスの状態を取得
-                    Toggle toggle = checkboxGO.GetComponent<Toggle>();
-                    bool isChecked = toggle != null && toggle.isOn;
+                // チェックボックスの状態を取得
+                Toggle toggle = checkboxGO.GetComponent<Toggle>();
+                bool isChecked = toggle != null && toggle.isOn;
 
-                    // チェックボックスの状態を保存
-                    desktopData.SetCheckboxState(checkboxName, isChecked);
+                // チェックボックスの状態を保存
+                desktopData.SetCheckboxState(checkboxName, isChecked);
             }
         }
     }
