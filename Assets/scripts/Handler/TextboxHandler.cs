@@ -10,6 +10,7 @@ namespace U22Game.Handlers
     {
         public static event UnityAction<TextboxHandler> StartTextboxEvent;
         public static event UnityAction TextboxClickEvent;
+        public static event UnityAction CompleteSetTextEvent;
         private bool waitFlag = false;
         private Canvas textbox;
         private Coroutine setTextCoroutine;
@@ -72,6 +73,7 @@ namespace U22Game.Handlers
                         StopCoroutine(setTextCoroutine);
                         setTextCoroutine = null;
                         textfieldMain.maxVisibleCharacters = length;
+                        CompleteSetTextEvent?.Invoke();
                     }
                 }
             }
@@ -109,6 +111,8 @@ namespace U22Game.Handlers
             textMeshPro.maxVisibleCharacters = length;
 
             setTextCoroutine = null;
+
+            CompleteSetTextEvent?.Invoke();
         }
 
         private IEnumerator WaitSkipCoroutine(int delaySkip)
