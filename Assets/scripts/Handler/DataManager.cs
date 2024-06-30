@@ -1,4 +1,5 @@
 using UnityEngine;
+using U22Game.Events;
 
 namespace U22Game.Handlers
 {
@@ -11,6 +12,9 @@ namespace U22Game.Handlers
             // 初期化された SaveData インスタンスを生成
             saveData = new SaveDataHandler();
 
+            // 初期化された EventSelection インスタンスを生成
+            EventSelection eventSelection = new();
+
             // Day1 のデータを生成する
             GenerateDayData(1, 6); // 1日目に6台のPCを生成
 
@@ -18,6 +22,7 @@ namespace U22Game.Handlers
             GenerateDayData(2, 6); // 2日目に6台のPCを生成
 
             JsonIoHandler.SaveToJson(saveData);
+            JsonIoHandler.SaveSelectionsToJson(eventSelection);
         }
 
         public void ChangeNextDate()
