@@ -4180,6 +4180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60075bbc880a1a4dbd43a64f69468ee, type: 3}
   m_Name:
   m_EditorClassIdentifier:
+  buttonPrefab: {fileID: 5778918192590864242, guid: 799fa749bba12a747adfd9cbae0627ca, type: 3}
+  startYPosition: 125
+  yOffset: -150
 --- !u!1 &691049876
 GameObject:
   m_ObjectHideFlags: 0
