@@ -15,6 +15,7 @@ namespace U22Game.Events
         public string highlight { get; set; }       // ハイライト対象のオブジェクトID
         public int delay { get; set; }              // テキスト送りが可能になるまでの秒数
         public string map_id { get; set; }          // マップID
+        public List<string> selections{ get; set; }  // 選択肢の配列
         public CameraPosition camera_pos { get; set; }  // カメラ位置
 
         [Serializable]
