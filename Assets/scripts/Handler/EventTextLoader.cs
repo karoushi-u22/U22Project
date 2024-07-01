@@ -104,6 +104,8 @@ namespace U22Game.Handlers
 
                         yield return new WaitUntil(() => onClickButtonFlag == true);  // いずれかの選択肢のボタンが押されるまで待機
 
+                        onClickButtonFlag = false;
+
                         EventSelection.PlayerSelection playerSelection = new() { title = instance.jsonFileName + " : " + eventText.text };  // 選択肢を格納するインスタンスを新規作成
 
                         foreach (var selection in eventText.selections)  // 各選択肢を取り出し、選択肢の配列に追加
