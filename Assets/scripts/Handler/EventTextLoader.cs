@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using U22Game.Events;
 using U22Game.Controller;
 
@@ -8,6 +9,7 @@ namespace U22Game.Handlers
 {
     public class EventTextLoader : MonoBehaviour
     {
+        public static event UnityAction FinishEvent;
         private static EventTextLoader instance;
         private static CharacterController2D characterController;
         private readonly string characterGameobject = "main_character_1";
@@ -136,6 +138,8 @@ namespace U22Game.Handlers
             }
 
             characterController.enabled = true;
+
+            FinishEvent.Invoke();
         }
 
         void StartTextbox(TextboxHandler textbox)
