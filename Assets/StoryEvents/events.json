@@ -1,0 +1,17 @@
+[
+	{
+		"eventFile": "tutorial.json",
+		"executeDate": 1,
+		"executeTiming": "afterLoad"
+	},
+	{
+		"eventFile": "tutorial2.json",
+		"executeDate": 1,
+		"executeTiming": "afterLoad"
+	},
+	{
+		"eventFile": "イベント名.json",
+		"executeDate": 2,
+		"executeTiming": "npc名"
+	}
+]

@@ -1,0 +1,40 @@
+[
+    {
+        "text": "ここが君が毎日出勤した時に最初に見る場所だよ。\nhogehoge。",
+        "sender": "上司",
+        "highlight": "pc1",
+        "delay": 10,
+        "map-id": "office",
+        "camera-pos": {
+	        "x": 0,
+	        "z": 0
+        }
+    },
+    {
+        "text": "どうしたら調べられるんですか。",
+        "sender": "自分",
+        "highlight": "",
+        "delay": 0,
+        "map-id": "office",
+        "camera-pos": {
+	        "x": 0,
+	        "z": 0
+        }
+    },
+    {
+        "text": "このPCの前で'F'キーを押すことで開くことができるよ。",
+        "sender": "上司",
+        "highlight": "pc1",
+        "delay": 0,
+        "map-id": "office",
+        "selections": [
+            "はい",
+            "いいえ",
+            "わからない"
+        ],
+        "camera-pos": {
+	        "x": 0,
+	        "z": 0
+        }
+    }
+]

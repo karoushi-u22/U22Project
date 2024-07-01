@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using U22Game.Handlers;
@@ -15,9 +16,10 @@ namespace U22Game.UI
         [SerializeField] private Vector2 startPosition; // チェックボックスの開始位置
         [SerializeField] private Vector2 spacing; // チェックボックスの間隔
 
+        public static event UnityAction ChangeCheckboxEvent;
+
         private GameObject[] generatedCheckboxes; // 生成されたチェックボックスを保持する配列
 
-        private SaveDataHandler saveData; // SaveData インスタンスを保持する変数
         private DesktopHandler desktopData;
 
         private void OnEnable()
@@ -32,24 +34,17 @@ namespace U22Game.UI
             DesktopEvent.ExitDeskEvent -= HandleExitDeskEvent;
         }
 
-        // データを読み取るための SaveData インスタンスをセットアップ
-        private void SetupSaveDataInstance()
-        {
-            // DataManager オブジェクトを探して、その SaveData インスタンスを取得
-            saveData = JsonIoHandler.LoadFromJson();
-        }
-
         private void HandleItemGenerated(string objectName, DesktopHandler desktopData)
         {
             this.desktopData = desktopData;
             // チェックボックスを生成する
             GenerateCheckboxes();
 
-            // SaveData インスタンスをセットアップ
-            SetupSaveDataInstance();
-
             // 保存されたチェックボックスの状態を読み込む
             LoadCheckboxStates(desktopData);
+
+            // チェックボックスの状態変化時に状態を保存するイベントリスナーの追加
+            AddListenerCheckbox();
         }
 
         private void HandleExitDeskEvent()
@@ -86,13 +81,6 @@ namespace U22Game.UI
 
                 // 生成されたチェックボックスを配列に追加
                 generatedCheckboxes[i] = checkboxGO;
-
-                // Toggle の onValueChanged イベントに保存処理を追加
-                Toggle toggle = checkboxGO.GetComponent<Toggle>();
-                if (toggle != null)
-                {
-                    toggle.onValueChanged.AddListener((isChecked) => SaveCheckboxStates());
-                }
             }
         }
 
@@ -120,6 +108,21 @@ namespace U22Game.UI
             }
         }
 
+        private void AddListenerCheckbox()
+        {
+            foreach (GameObject checkboxGO in generatedCheckboxes)
+            {
+                // Toggle の onValueChanged イベントに保存処理を追加
+                if (checkboxGO.TryGetComponent<Toggle>(out var toggle))
+                {
+                    toggle.onValueChanged.AddListener(isOn => {
+                        SaveCheckboxStates();
+                        ChangeCheckboxEvent.Invoke();
+                    });
+                }
+            }
+        }
+
         // 保存されたチェックボックスの状態を読み込む
         private void LoadCheckboxStates(DesktopHandler desktopData)
         {
@@ -143,51 +146,17 @@ namespace U22Game.UI
         // チェックボックスの状態を保存する
         private void SaveCheckboxStates()
         {
-            // 保存先のデスクトップデータを取得
-            if (saveData != null)
+            foreach (GameObject checkboxGO in generatedCheckboxes)
             {
-                foreach (GameObject checkboxGO in generatedCheckboxes)
-                {
-                    // チェックボックスの名前を取得
-                    string checkboxName = checkboxGO.GetComponentInChildren<TextMeshProUGUI>().text;
+                // チェックボックスの名前を取得
+                string checkboxName = checkboxGO.GetComponentInChildren<TextMeshProUGUI>().text;
 
-                    // チェックボックスの状態を取得
-                    Toggle toggle = checkboxGO.GetComponent<Toggle>();
-                    bool isChecked = toggle != null && toggle.isOn;
+                // チェックボックスの状態を取得
+                Toggle toggle = checkboxGO.GetComponent<Toggle>();
+                bool isChecked = toggle != null && toggle.isOn;
 
-                    // チェックボックスの状態を保存
-                    desktopData.SetCheckboxState(checkboxName, isChecked);
-                }
-            }
-        }
-
-        // イベントトリガーからチェックボックスの状態を変更する
-        public void ChangeCheckboxStateOnObjectClick(string objectName)
-        {
-            if (generatedCheckboxes != null)
-            {
-                for (int i = 0; i < generatedCheckboxes.Length; i++)
-                {
-                    // チェックボックスの名前を取得
-                    string checkboxName = generatedCheckboxes[i].GetComponentInChildren<TextMeshProUGUI>().text;
-
-                    // 指定されたオブジェクトに関連するチェックボックスか確認
-                    if (checkboxName == objectName)
-                    {
-                        // チェックボックスの状態を反転させる
-                        Toggle toggle = generatedCheckboxes[i].GetComponent<Toggle>();
-                        if (toggle != null)
-                        {
-                            toggle.isOn = !toggle.isOn;
-
-                            // 状態の保存
-                            SaveCheckboxStates();
-                        }
-
-                        // チェックボックスが見つかったらループを抜ける
-                        break;
-                    }
-                }
+                // チェックボックスの状態を保存
+                desktopData.SetCheckboxState(checkboxName, isChecked);
             }
         }
     }

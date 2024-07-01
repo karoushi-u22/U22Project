@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using U22Game.Handlers;
+using U22Game.UI;
 
 namespace U22Game.Events{
     public class DesktopEvent : MonoBehaviour
@@ -16,6 +17,17 @@ namespace U22Game.Events{
 
         private bool isColliding = false;
         private bool isDeskEvent = false;
+        private bool isChangeCheckbox = false;
+
+        void Start()
+        {
+            PadCheckboxUI.ChangeCheckboxEvent += OnChangeCheckbox;
+        }
+
+        void OnDestroy()
+        {
+            PadCheckboxUI.ChangeCheckboxEvent -= OnChangeCheckbox;
+        }
 
         private void Update()
         {
@@ -50,6 +62,18 @@ namespace U22Game.Events{
 
                 JsonIoHandler.SaveToJson(saveData);
             }
+            // デスクトップイベント発生中にチェックボックスチェンジイベントが発生した時にデータをセーブする
+            if (isDeskEvent && isChangeCheckbox)
+            {
+                Debug.Log("ChangeCheckbox");
+                JsonIoHandler.SaveToJson(saveData);
+                isChangeCheckbox = false;
+            }
+        }
+
+        private void OnChangeCheckbox()
+        {
+            isChangeCheckbox = true;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
