@@ -11,6 +11,7 @@ namespace U22Game.Handlers
         public static event UnityAction<TextboxHandler> StartTextboxEvent;
         public static event UnityAction TextboxClickEvent;
         public static event UnityAction CompleteSetTextEvent;
+        public static event UnityAction CompleteWaitTextEvent;
         private bool waitFlag = false;
         private Canvas textbox;
         private Coroutine setTextCoroutine;
@@ -116,6 +117,7 @@ namespace U22Game.Handlers
             yield return new WaitForSeconds(Math.Max(delayStart, delaySkip));
 
             Debug.Log("Skip Available");
+            CompleteWaitTextEvent.Invoke();
             waitFlag = false;
         }
 
