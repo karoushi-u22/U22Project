@@ -19,7 +19,7 @@ namespace U22Game.Handlers
         private string jsonFileName;
         private bool startTextboxFlag = false;
         private bool onClickFlag = false;
-        private bool onComplateSetTextFlag = false;
+        private bool onCompleteSetTextFlag = false;
         private bool onClickButtonFlag = false;
 
         void Awake()
@@ -91,14 +91,14 @@ namespace U22Game.Handlers
                 foreach (var eventText in eventTextList)
                 {
                     onClickFlag = false;
-                    onComplateSetTextFlag = false;
+                    onCompleteSetTextFlag = false;
 
                     textboxHandler.SetTextMain(eventText.text, eventText.delay); // メインテキストを設定
                     textboxHandler.SetTextPlayerName(eventText.sender); // プレイヤー名を設定
 
                     if (eventText.selections != null)
                     {
-                        yield return new WaitUntil(() => onComplateSetTextFlag == true);  // テキストが全て表示されるまで待機
+                        yield return new WaitUntil(() => onCompleteSetTextFlag == true);  // テキストが全て表示されるまで待機
 
                         SelectButtonHandler.ShowButton(eventText.selections);
 
@@ -159,7 +159,7 @@ namespace U22Game.Handlers
         // テキストが全て表示された時のイベント
         void OnCompleteSetText()
         {
-            onComplateSetTextFlag = true;
+            onCompleteSetTextFlag = true;
         }
 
         // 選択肢のボタンが押された時のイベント
