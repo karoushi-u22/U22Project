@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
 
@@ -14,6 +15,7 @@ namespace U22Game.Handlers
         public static event UnityAction CompleteWaitTextEvent;
         private bool waitFlag = false;
         private Canvas textbox;
+        private Image imageTextskip;
         private Coroutine setTextCoroutine;
         [SerializeField] private TextMeshProUGUI textfieldMain;
         [SerializeField] private TextMeshProUGUI textfieldPlayerName;
@@ -28,6 +30,15 @@ namespace U22Game.Handlers
                 Debug.LogError("Canvas component not found.");
             }
 
+            // Imageコンポーネントの取得
+            if (textbox != null)
+            {
+                if (!textbox.gameObject.transform.Find("TextSkip").TryGetComponent<Image>(out imageTextskip))
+                {
+                    Debug.LogError("Image component not found.");
+                }
+            }
+
             // TextMeshProUGUIコンポーネントの確認
             if (textfieldMain == null)
             {
@@ -39,8 +50,9 @@ namespace U22Game.Handlers
                 Debug.LogError("TextMeshProUGUI component for textfieldPlayerName not assigned.");
             }
 
-            // 初期値はTextbox非表示
+            // 初期値はTextboxとTextSkipアイコン非表示
             HideTextbox();
+            imageTextskip.enabled = false;
 
             // Textbox読み込み完了時にイベントを発火
             StartTextboxEvent?.Invoke(this);
@@ -77,6 +89,7 @@ namespace U22Game.Handlers
         private IEnumerator SetTextCoroutine(TextMeshProUGUI textMeshPro, string newText, int delaySkip)
         {
             textMeshPro.maxVisibleCharacters = 0;
+            imageTextskip.enabled = false;
 
             if (textfieldMain != null)
             {
@@ -117,6 +130,7 @@ namespace U22Game.Handlers
             yield return new WaitForSeconds(Math.Max(delayStart, delaySkip));
 
             Debug.Log("Skip Available");
+            imageTextskip.enabled = true;
             CompleteWaitTextEvent.Invoke();
             waitFlag = false;
         }
