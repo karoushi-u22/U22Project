@@ -19,7 +19,8 @@ namespace U22Game.Handlers
         private string jsonFileName;
         private bool startTextboxFlag = false;
         private bool onClickFlag = false;
-        private bool onComplateSetTextFlag = false;
+        private bool onCompleteSetTextFlag = false;
+        private bool onCompleteWaitFlag = false;
         private bool onClickButtonFlag = false;
 
         void Awake()
@@ -56,6 +57,7 @@ namespace U22Game.Handlers
             // TextboxHandlerのイベントを解除
             TextboxHandler.StartTextboxEvent -= StartTextbox;
             TextboxHandler.TextboxClickEvent -= OnClickTextbox;
+            TextboxHandler.CompleteWaitTextEvent -= OnCompleteWaitTextbox;
             TextboxHandler.CompleteSetTextEvent -= OnCompleteSetText;
         }
 
@@ -91,14 +93,15 @@ namespace U22Game.Handlers
                 foreach (var eventText in eventTextList)
                 {
                     onClickFlag = false;
-                    onComplateSetTextFlag = false;
+                    onCompleteSetTextFlag = false;
+                    onCompleteWaitFlag = false;
 
                     textboxHandler.SetTextMain(eventText.text, eventText.delay); // メインテキストを設定
                     textboxHandler.SetTextPlayerName(eventText.sender); // プレイヤー名を設定
 
                     if (eventText.selections != null)
                     {
-                        yield return new WaitUntil(() => onComplateSetTextFlag == true);  // テキストが全て表示されるまで待機
+                        yield return new WaitUntil(() => onCompleteSetTextFlag == true && onCompleteWaitFlag == true);  // テキストが全て表示されるまで待機
 
                         SelectButtonHandler.ShowButton(eventText.selections);
 
@@ -159,7 +162,12 @@ namespace U22Game.Handlers
         // テキストが全て表示された時のイベント
         void OnCompleteSetText()
         {
-            onComplateSetTextFlag = true;
+            onCompleteSetTextFlag = true;
+        }
+
+        void OnCompleteWaitTextbox()
+        {
+            onCompleteWaitFlag = true;
         }
 
         // 選択肢のボタンが押された時のイベント
