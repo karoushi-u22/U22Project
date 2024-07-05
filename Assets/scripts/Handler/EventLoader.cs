@@ -55,6 +55,11 @@ namespace U22Game.Handlers
 
                         isFinishEvent = false;
                     }
+                    else if (eventItem.executeDate == currentDate)
+                    {
+                        GameObject eventGameObject = GameObject.Find(eventItem.executeTiming);
+                        eventGameObject.AddComponent<CharacterEventHandler>().jsonFile = eventItem.eventFile;
+                    }
                 }
         }
     }

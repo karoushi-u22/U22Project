@@ -10,8 +10,8 @@
 		"executeTiming": "afterLoad"
 	},
 	{
-		"eventFile": "イベント名.json",
-		"executeDate": 2,
-		"executeTiming": "npc名"
+		"eventFile": "spy.json",
+		"executeDate": 1,
+		"executeTiming": "senpai_spy_1"
 	}
 ]

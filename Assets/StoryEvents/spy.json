@@ -1,0 +1,50 @@
+[
+    {
+        "text": "今日も一日お疲れ様。\n少しいいかな？",
+        "sender": "オカダ シュウジ",
+        "highlight": "",
+        "delay": 2,
+        "map-id": "office",
+        "camera-pos": {
+            "x": 0,
+            "z": 0
+        }
+    },
+    {
+        "text": "君は今の\"ジブン\"が\nもっと\"評価\"されるべきだと感じないか？",
+        "sender": "オカダ シュウジ",
+        "highlight": "",
+        "delay": 5,
+        "map-id": "office",
+        "selections": [
+            "はい",
+            "いいえ"
+        ],
+        "camera-pos": {
+            "x": 0,
+            "z": 0
+        }
+    },
+    {
+        "text": "そうか...。",
+        "sender": "オカダ シュウジ",
+        "highlight": "",
+        "delay": 3,
+        "map-id": "office",
+        "camera-pos": {
+            "x": 0,
+            "z": 0
+        }
+    },
+    {
+        "text": "それならいいんだ、今日もお疲れ様。",
+        "sender": "オカダ シュウジ",
+        "highlight": "",
+        "delay": 1,
+        "map-id": "office",
+        "camera-pos": {
+            "x": 0,
+            "z": 0
+        }
+    }
+]
