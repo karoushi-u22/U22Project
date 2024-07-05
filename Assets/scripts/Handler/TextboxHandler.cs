@@ -14,7 +14,6 @@ namespace U22Game.Handlers
         private bool waitFlag = false;
         private Canvas textbox;
         private Coroutine setTextCoroutine;
-        private Coroutine waitSkipCoroutine;
         [SerializeField] private TextMeshProUGUI textfieldMain;
         [SerializeField] private TextMeshProUGUI textfieldPlayerName;
         [SerializeField] private float delayStart = 0.5f;  // 最初の文字を表示するまでの時間
@@ -60,12 +59,6 @@ namespace U22Game.Handlers
                     if (!waitFlag && setTextCoroutine == null)
                     {
                         TextboxClickEvent?.Invoke();
-
-                        if (waitSkipCoroutine != null)
-                        {
-                            StopCoroutine(waitSkipCoroutine);
-                            waitSkipCoroutine = null;
-                        }
                     }
                     // テキストが全て表示されていないとき、コルーチンを停止しテキストを全て表示する
                     else if (!waitFlag && textfieldMain.maxVisibleCharacters < length)
@@ -89,7 +82,7 @@ namespace U22Game.Handlers
                 textfieldMain.text = newText;
             }
 
-            waitSkipCoroutine = StartCoroutine(WaitSkipCoroutine(delaySkip));
+            StartCoroutine(WaitSkipCoroutine(delaySkip));
             yield return new WaitForSeconds(delayStart);
 
             int length = textMeshPro.text.Length;
