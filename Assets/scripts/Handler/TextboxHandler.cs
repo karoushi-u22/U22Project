@@ -57,7 +57,7 @@ namespace U22Game.Handlers
                     int length = textfieldMain.text.Length;
 
                     // setTextCoroutineが終了したとき
-                    if (setTextCoroutine == null)
+                    if (!waitFlag && setTextCoroutine == null)
                     {
                         TextboxClickEvent?.Invoke();
 
