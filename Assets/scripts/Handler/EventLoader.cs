@@ -6,7 +6,7 @@ namespace U22Game.Handlers
 {
     public class EventLoader : MonoBehaviour
     {
-        [SerializeField] private string jsonFile = "events.json";
+        [SerializeField] private string jsonFile = "events";
         private List<Events.Event> eventList;
         private int currentDate;
         private bool isFinishEvent = true;

@@ -4371,7 +4371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac986b9a30b5a9f47b91b7271dfc969a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jsonFile: events.json
+  jsonFile: events
 --- !u!1 &878656037
 GameObject:
   m_ObjectHideFlags: 0

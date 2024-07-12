@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text.Json;
 using UnityEngine;
+using UnityEditor;
 
 namespace U22Game.Events
 {
@@ -19,13 +20,18 @@ namespace U22Game.Events
         {
             try
             {
-                jsonFilePath = Path.Combine(Application.dataPath, eventFolderPath, jsonFilePath);
+                jsonFilePath = Path.Combine(eventFolderPath, jsonFilePath);
+                TextAsset jsonTextAsset = Resources.Load<TextAsset>(jsonFilePath);
+
+                if (jsonTextAsset == null)
+                {
+                    Debug.LogError($"Failed to load JSON file from Resources: {jsonFilePath}");
+                    return null;
+                }
+
                 Debug.Log("path: " + jsonFilePath);
 
-                StreamReader reader = new(jsonFilePath);
-                string jsonData = reader.ReadToEnd();
-                reader.Close();
-
+                string jsonData = jsonTextAsset.text;
                 return JsonSerializer.Deserialize<List<Event>>(jsonData);
             }
             catch (JsonException ex)

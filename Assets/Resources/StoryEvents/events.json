@@ -1,16 +1,16 @@
 [
 	{
-		"eventFile": "tutorial.json",
+		"eventFile": "tutorial",
 		"executeDate": 1,
 		"executeTiming": "afterLoad"
 	},
 	{
-		"eventFile": "tutorial2.json",
+		"eventFile": "tutorial2",
 		"executeDate": 2,
 		"executeTiming": "afterLoad"
 	},
 	{
-		"eventFile": "spy.json",
+		"eventFile": "spy",
 		"executeDate": 1,
 		"executeTiming": "senpai_spy_1"
 	}
