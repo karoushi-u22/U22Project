@@ -49,6 +49,7 @@ namespace U22Game.Handlers
             // TextboxHandlerのイベントを使用
             TextboxHandler.TextboxClickEvent += OnClickTextbox;
             TextboxHandler.CompleteSetTextEvent += OnCompleteSetText;
+            TextboxHandler.CompleteWaitTextEvent += OnCompleteWaitTextbox;
             SelectButtonHandler.ClickEvent += OnClickButton;
         }
 
