@@ -159,5 +159,35 @@ namespace U22Game.UI
                 desktopData.SetCheckboxState(checkboxName, isChecked);
             }
         }
+
+        // UIの対応するアイテムのアイコンからチェックボックスの状態を変更する
+        public void ChangeCheckboxStateOnObjectClick(string objectName)
+        {
+            if (generatedCheckboxes != null)
+            {
+                for (int i = 0; i < generatedCheckboxes.Length; i++)
+                {
+                    // チェックボックスの名前を取得
+                    string checkboxName = generatedCheckboxes[i].GetComponentInChildren<TextMeshProUGUI>().text;
+
+                    // 指定されたオブジェクトに関連するチェックボックスか確認
+                    if (checkboxName == objectName)
+                    {
+                        // チェックボックスの状態を反転させる
+                        Toggle toggle = generatedCheckboxes[i].GetComponent<Toggle>();
+                        if (toggle != null)
+                        {
+                            toggle.isOn = !toggle.isOn;
+
+                            // 状態の保存
+                            SaveCheckboxStates();
+                        }
+
+                        // チェックボックスが見つかったらループを抜ける
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
